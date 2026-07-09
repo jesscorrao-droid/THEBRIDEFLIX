@@ -1,149 +1,60 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THEBRIDEFLIX</title>
 
-<title>THEBRIDEFLIX</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-background:#111;
-color:white;
-}
-
-header{
-position:fixed;
-top:0;
-width:100%;
-padding:20px 50px;
-background:linear-gradient(to bottom,rgba(0,0,0,.9),transparent);
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:999;
-}
-
-.logo{
-font-size:42px;
-font-weight:bold;
-color:#ff2d55;
-}
-
-.hero{
-height:100vh;
-background:url("https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600") center center/cover;
-display:flex;
-align-items:center;
-padding-left:70px;
-}
-
-.hero-content{
-max-width:600px;
-}
-
-.hero h1{
-font-size:70px;
-margin-bottom:20px;
-}
-
-.hero p{
-font-size:22px;
-line-height:1.5;
-margin-bottom:30px;
-}
-
-button{
-background:#ff2d55;
-color:white;
-border:none;
-padding:18px 40px;
-font-size:20px;
-border-radius:8px;
-cursor:pointer;
-}
-
-section{
-padding:40px 60px;
-}
-
-.row{
-display:flex;
-gap:20px;
-overflow-x:auto;
-}
-
-.card{
-min-width:250px;
-height:150px;
-background:#222;
-border-radius:10px;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:22px;
-transition:.3s;
-cursor:pointer;
-}
-
-.card:hover{
-transform:scale(1.08);
-}
-
-</style>
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
+<header class="navbar">
 
-<div class="logo">THEBRIDEFLIX</div>
+    <div class="logo">
+        THEBRIDEFLIX
+    </div>
 
 </header>
 
-<div class="hero">
+<section class="hero">
 
-<div class="hero-content">
+    <div class="overlay"></div>
 
-<h1>Jessica ❤️ Sara</h1>
+    <div class="hero-content">
 
-<p>Benvenuti nella piattaforma ufficiale del nostro matrimonio.</p>
+        <h1>Jessica ❤️ Sara</h1>
 
-<button>Guarda il Trailer</button>
+        <p>
+            Il nostro matrimonio raccontato come un film.
+        </p>
 
-</div>
+        <button id="watchTrailer">
+            ▶ Guarda il Trailer
+        </button>
 
-</div>
+    </div>
 
-<section>
+</section>
 
-<h2 style="margin-bottom:25px;">I Video</h2>
+<section class="movies">
 
-<div class="row">
+<h2>I Video</h2>
+
+<div class="cards">
 
 <div class="card">Trailer</div>
-
 <div class="card">Cerimonia</div>
-
 <div class="card">Ricevimento</div>
-
+<div class="card">Party</div>
 <div class="card">Backstage</div>
-
-<div class="card">Photobooth</div>
 
 </div>
 
 </section>
 
-</body>
+<script src="script.js"></script>
 
+</body>
 </html>
