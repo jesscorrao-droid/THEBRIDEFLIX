@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THEBRIDEFLIX</title>
+    <title>BRIDEFLIX</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<header class="navbar">
+<header>
 
     <div class="logo">
         BRIDEFLIX
     </div>
+
+    <nav>
+
+        <a href="#">Home</a>
+        <a href="#video">Video</a>
+        <a href="#gallery">Foto</a>
+        <a href="#about">La nostra storia</a>
+
+    </nav>
 
 </header>
 
@@ -24,35 +36,124 @@
 
     <div class="hero-content">
 
-        <h1>PROVA 123</h1>
+        <span class="featured">
+            EVENTO ESCLUSIVO
+        </span>
+
+        <h1>Emanuela ❤️ Lucia</h1>
 
         <p>
-            Il nostro matrimonio raccontato come un film.
+
+            Benvenuti nella piattaforma ufficiale del nostro matrimonio.
+            Qui troverete tutti i momenti più belli della nostra giornata.
+
         </p>
 
-        <button id="watchTrailer">
-            ▶ Guarda il Trailer
-        </button>
+        <div class="buttons">
+
+            <button id="watchTrailer" class="play">
+
+                ▶ Guarda il Trailer
+
+            </button>
+
+            <button class="info">
+
+                ℹ Scopri di più
+
+            </button>
+
+        </div>
 
     </div>
 
 </section>
 
-<section class="movies">
+<section class="section" id="video">
 
-<h2>I Video</h2>
+<h2>Video del Matrimonio</h2>
 
 <div class="cards">
 
-<div class="card">Trailer</div>
-<div class="card">Cerimonia</div>
-<div class="card">Ricevimento</div>
-<div class="card">Party</div>
-<div class="card">Backstage</div>
+<div class="card">
+
+<img src="images/trailer.jpg">
+
+<h3>Trailer</h3>
+
+</div>
+
+<div class="card">
+
+<img src="images/cerimonia.jpg">
+
+<h3>Cerimonia</h3>
+
+</div>
+
+<div class="card">
+
+<img src="images/ricevimento.jpg">
+
+<h3>Ricevimento</h3>
+
+</div>
+
+<div class="card">
+
+<img src="images/backstage.jpg">
+
+<h3>Backstage</h3>
+
+</div>
+
+<div class="card">
+
+<img src="images/party.jpg">
+
+<h3>Party</h3>
+
+</div>
 
 </div>
 
 </section>
+
+<section class="section" id="gallery">
+
+<h2>Galleria Fotografica</h2>
+
+<p class="coming">
+
+Le fotografie saranno disponibili a breve.
+
+</p>
+
+</section>
+
+<section class="section" id="about">
+
+<h2>La nostra storia</h2>
+
+<p class="story">
+
+Ogni grande storia merita di essere raccontata.
+
+Grazie per essere qui con noi.
+
+</p>
+
+</section>
+
+<footer>
+
+<p>
+
+© 2026 BRIDEFLIX
+
+</p>
+
+</footer>
 
 <div id="videoModal" class="modal">
 
@@ -61,19 +162,21 @@
 <span class="close">&times;</span>
 
 <iframe
+
 id="trailerVideo"
-width="100%"
-height="100%"
+
 src="https://www.youtube.com/embed/iRvdNalM-To"
-title="Trailer"
-frameborder="0"
+
 allowfullscreen>
+
 </iframe>
 
 </div>
 
 </div>
+
 <script src="script.js"></script>
 
 </body>
+
 </html>
