@@ -18,7 +18,7 @@ let lastScrollPosition = 0;
 // TRAILER PRINCIPALE
 // ----------------------------
 
-const trailerURL="https://www.youtube.com/embed/iRvdNalM-To?autoplay=1";
+const trailerURL="";
 
 if(trailerButton){
 
