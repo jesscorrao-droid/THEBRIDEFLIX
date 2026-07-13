@@ -171,3 +171,29 @@ function createCategory(category,containerID){
     });
 
 }
+
+/* ======================================
+   PWA
+====================================== */
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", () => {
+
+        navigator.serviceWorker.register("./service-worker.js")
+
+            .then(() => {
+
+                console.log("BrideFlix PWA attiva");
+
+            })
+
+            .catch(err => {
+
+                console.log(err);
+
+            });
+
+    });
+
+}
