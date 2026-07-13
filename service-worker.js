@@ -1,41 +1,71 @@
-const CACHE_NAME = "brideflix-v1";
+const CACHE_NAME = "brideflix-cache";
 
-const urlsToCache = [
-  "./",
-  "./index.html",
-  "./style.css",
-  "./script.js",
-  "./data.js"
+const FILES = [
+    "./",
+    "./index.html",
+    "./style.css",
+    "./script.js",
+    "./data.js",
+    "./manifest.json"
 ];
 
+// INSTALL
 self.addEventListener("install", event => {
 
-  event.waitUntil(
+    self.skipWaiting();
 
-    caches.open(CACHE_NAME)
+    event.waitUntil(
 
-      .then(cache => {
+        caches.open(CACHE_NAME)
+            .then(cache => cache.addAll(FILES))
 
-        return cache.addAll(urlsToCache);
-
-      })
-
-  );
+    );
 
 });
 
+// ACTIVATE
+self.addEventListener("activate", event => {
+
+    event.waitUntil(
+
+        caches.keys().then(keys =>
+
+            Promise.all(
+
+                keys
+                    .filter(key => key !== CACHE_NAME)
+                    .map(key => caches.delete(key))
+
+            )
+
+        ).then(() => self.clients.claim())
+
+    );
+
+});
+
+// FETCH
 self.addEventListener("fetch", event => {
 
-  event.respondWith(
+    if (event.request.method !== "GET") return;
 
-    caches.match(event.request)
+    event.respondWith(
 
-      .then(response => {
+        fetch(event.request)
 
-        return response || fetch(event.request);
+            .then(response => {
 
-      })
+                const copy = response.clone();
 
-  );
+                caches.open(CACHE_NAME)
+                    .then(cache => cache.put(event.request, copy));
+
+                return response;
+
+            })
+
+            .catch(() => caches.match(event.request))
+
+    );
 
 });
