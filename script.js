@@ -10,25 +10,10 @@
 const modal = document.getElementById("videoModal");
 const iframe = document.getElementById("trailerVideo");
 const closeButton = document.querySelector(".close");
-const trailerButton = document.getElementById("watchTrailer");
 const homeButton = document.getElementById("goHome");
 let lastScrollPosition = 0;
 
-// ----------------------------
-// TRAILER PRINCIPALE
-// ----------------------------
 
-const trailerURL="";
-
-if(trailerButton){
-
-    trailerButton.addEventListener("click",()=>{
-
-        openVideo(trailerURL);
-
-    });
-
-}
 
 // ----------------------------
 // APRE VIDEO
