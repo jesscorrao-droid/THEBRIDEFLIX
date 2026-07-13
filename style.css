@@ -124,7 +124,17 @@ HERO
 
     object-fit:cover;
 
-    object-position:center center;
+}
+
+.hero-desktop{
+
+    display:block;
+
+}
+
+.hero-mobile{
+
+    display:none;
 
 }
 
@@ -1004,6 +1014,21 @@ nav{
 .logo{
 
     font-size:32px;
+
+}
+.hero-desktop{
+
+    display:none;
+
+}
+
+.hero-mobile{
+
+    display:block;
+
+    object-fit:cover;
+
+    object-position:center top;
 
 }
 
