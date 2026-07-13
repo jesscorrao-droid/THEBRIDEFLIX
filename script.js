@@ -7,59 +7,77 @@
 // ELEMENTI
 // ----------------------------
 
-const trailerButton = document.getElementById("watchTrailer");
 const modal = document.getElementById("videoModal");
-const closeButton = document.querySelector(".close");
 const iframe = document.getElementById("trailerVideo");
-
-const trailerURL =
-"https://www.youtube.com/embed/iRvdNalM-To?autoplay=1";
+const closeButton = document.querySelector(".close");
+const trailerButton = document.getElementById("watchTrailer");
+const homeButton = document.getElementById("goHome");
+let lastScrollPosition = 0;
 
 // ----------------------------
-// APERTURA TRAILER
+// TRAILER PRINCIPALE
 // ----------------------------
 
-if (trailerButton) {
+const trailerURL="https://www.youtube.com/embed/iRvdNalM-To?autoplay=1";
 
-    trailerButton.addEventListener("click", () => {
+if(trailerButton){
 
-        iframe.src = trailerURL;
+    trailerButton.addEventListener("click",()=>{
 
-        modal.style.display = "block";
-
-        document.body.style.overflow = "hidden";
+        openVideo(trailerURL);
 
     });
 
 }
 
 // ----------------------------
-// CHIUSURA POPUP
+// APRE VIDEO
+// ----------------------------
+
+function openVideo(url){
+
+    if(!url) return;
+
+    // Salva la posizione della pagina
+    lastScrollPosition = window.scrollY;
+
+    iframe.src = url;
+
+    modal.style.display = "block";
+
+    document.body.style.overflow = "hidden";
+
+}
+
+// ----------------------------
+// CHIUDE VIDEO
 // ----------------------------
 
 function closeVideo(){
 
-    modal.style.display = "none";
+    modal.style.display="none";
 
-    iframe.src = "";
+    iframe.src="";
 
-    document.body.style.overflow = "auto";
-
-}
-
-if(closeButton){
-
-    closeButton.addEventListener("click",closeVideo);
+    document.body.style.overflow="auto";
 
 }
 
-// ----------------------------
-// CLICK FUORI DAL VIDEO
-// ----------------------------
+closeButton.addEventListener("click",closeVideo);
 
-window.addEventListener("click",(event)=>{
+window.addEventListener("click",(e)=>{
 
-    if(event.target===modal){
+    if(e.target===modal){
+
+        closeVideo();
+
+    }
+
+});
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Escape"){
 
         closeVideo();
 
@@ -68,28 +86,32 @@ window.addEventListener("click",(event)=>{
 });
 
 // ----------------------------
-// TASTO ESC
+// TORNA ALLA HOME
 // ----------------------------
 
-document.addEventListener("keydown",(event)=>{
+homeButton.addEventListener("click",()=>{
 
-    if(event.key==="Escape"){
+    closeVideo();
 
-        closeVideo();
+    window.scrollTo({
 
-    }
+        top:lastScrollPosition,
+
+        behavior:"smooth"
+
+    });
 
 });
 
 // ----------------------------
-// NAVBAR SCURA DURANTE LO SCROLL
+// HEADER SCROLL
 // ----------------------------
 
-const header = document.querySelector("header");
+const header=document.querySelector("header");
 
 window.addEventListener("scroll",()=>{
 
-    if(window.scrollY>80){
+    if(window.scrollY>60){
 
         header.style.background="#000";
 
@@ -104,37 +126,48 @@ window.addEventListener("scroll",()=>{
 });
 
 // ----------------------------
-// ANIMAZIONE CARD
+// CREAZIONE AUTOMATICA CARD
 // ----------------------------
 
-const cards=document.querySelectorAll(".card");
+createCategory("party","partyCards");
+createCategory("nautoscopio","nautoscopioCards");
+createCategory("wedding","weddingCards");
+createCategory("special","specialCards");
 
-cards.forEach(card=>{
+function createCategory(category,containerID){
 
-    card.addEventListener("mouseenter",()=>{
+    const container=document.getElementById(containerID);
 
-        card.style.transform="scale(1.06)";
+    if(!container) return;
+
+    const list=videos.filter(v=>v.category===category);
+
+    list.forEach(video=>{
+
+        const card=document.createElement("div");
+
+        card.className="card";
+
+        card.innerHTML=`
+
+            <img src="${video.image}" alt="${video.title}">
+
+            <h3>${video.title}</h3>
+
+        `;
+
+        if(video.youtube!=""){
+
+            card.addEventListener("click",()=>{
+
+                openVideo(video.youtube);
+
+            });
+
+        }
+
+        container.appendChild(card);
 
     });
 
-    card.addEventListener("mouseleave",()=>{
-
-        card.style.transform="scale(1)";
-
-    });
-
-});
-
-// ----------------------------
-// MESSAGGIO PROVVISORIO
-// ----------------------------
-
-cards.forEach(card=>{
-
-    card.addEventListener("click",()=>{
-
-        alert("Qui apriremo il video selezionato.");
-
-    });
-
-});
+}

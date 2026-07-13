@@ -49,17 +49,19 @@ header{
 
     background:linear-gradient(to bottom,#000,transparent);
 
-}
 
-.logo{
+}.logo{
 
-    color:#E50914;
-
-    font-size:42px;
+    font-size:44px;
 
     font-weight:900;
 
     letter-spacing:2px;
+
+    background:linear-gradient(90deg,#ff2d95,#ff74c8);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 
 }
 
@@ -101,7 +103,7 @@ HERO
 
     position:relative;
 
-    background:url("images/banner.jpeg");
+    background:url("images/banner.jpg");
 
     background-size:cover;
 
@@ -275,25 +277,33 @@ GRIGLIA VIDEO
 
 .card{
 
+    position:relative;
+
     background:#1d1d1d;
 
-    border-radius:14px;
+    border-radius:16px;
 
     overflow:hidden;
 
     cursor:pointer;
 
-    transition:all .35s ease;
+    transition:.35s;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.35);
+    box-shadow:0 10px 25px rgba(0,0,0,.45);
 
 }
 
 .card:hover{
 
-    transform:scale(1.05);
+    transform:
+        perspective(1000px)
+        rotateX(5deg)
+        rotateY(-5deg)
+        scale(1.06);
 
-    box-shadow:0 15px 40px rgba(0,0,0,.5);
+    box-shadow:
+        0 25px 45px rgba(0,0,0,.6),
+        0 0 25px rgba(255,45,149,.35);
 
 }
 
@@ -307,19 +317,96 @@ GRIGLIA VIDEO
 
     display:block;
 
+    transition:.35s;
+
+}
+
+.card:hover img{
+
+    filter:brightness(.55);
+
+}
+
+.card::before{
+
+    content:"▶";
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%) scale(.6);
+
+    width:74px;
+
+    height:74px;
+
+    border-radius:50%;
+
+    background:#ff2d95;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:34px;
+
+    opacity:0;
+
+    transition:.35s;
+
+    z-index:5;
+
+}
+
+.card:hover::before{
+
+    opacity:1;
+
+    transform:translate(-50%,-50%) scale(1);
+
 }
 
 .card h3{
 
-    padding:18px;
+    position:absolute;
 
-    font-size:20px;
+    left:20px;
 
-    text-align:center;
+    right:20px;
 
-    font-weight:600;
+    bottom:20px;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+    transition:.35s;
+
+    z-index:10;
 
 }
+
+.card:hover h3{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
 
 /*-------------------------
 TESTI
@@ -381,7 +468,9 @@ POPUP VIDEO
 
     inset:0;
 
-    background:rgba(0,0,0,.92);
+    background:rgba(4, 2, 2, 0.95);
+
+    backdrop-filter:blur(8px);
 
     z-index:9999;
 
@@ -389,51 +478,413 @@ POPUP VIDEO
 
 .modal-content{
 
-    position:absolute;
+    position:fixed;
 
-    top:50%;
+    inset:0;
 
-    left:50%;
+    width:100vw;
 
-    transform:translate(-50%,-50%);
+    height:100vh;
 
-    width:min(95%,1100px);
+    background:black;
 
-    aspect-ratio:16/9;
+    display:flex;
 
-    background:#000;
+    justify-content:center;
 
-    border-radius:14px;
-
-    overflow:hidden;
+    align-items:center;
 
 }
 
 .modal iframe{
 
-    width:100%;
+    width:92vw;
 
-    height:100%;
+    height:92vh;
 
     border:none;
+
+    border-radius:18px;
 
 }
 
 .close{
 
-    position:absolute;
+    position:fixed;
 
-    top:15px;
+    top:25px;
 
-    right:20px;
+    right:35px;
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.6);
 
     color:white;
 
-    font-size:42px;
+    font-size:34px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 
     cursor:pointer;
 
+    transition:.3s;
+
+    z-index:99999;
+
+}
+
+/*-------------------------
+POPUP VIDEO
+-------------------------*/
+
+/*========================================
+PLAYER
+========================================*/
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:#000;
+
+    z-index:99999;
+
+}
+
+.modal-content{
+
+    position:absolute;
+
+    inset:0;
+
+    background:#000;
+
+}
+
+/* HEADER PLAYER */
+
+.player-header{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:88px;
+
+    background:#090909;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 35px;
+
+    border-bottom:3px solid #ff2d95;
+
+    z-index:100000;
+
+}
+
+/* LOGO */
+
+.playerLogo{
+
+    font-size:58px;
+
+    font-weight:900;
+
+    color:#ff2d95;
+
+    letter-spacing:2px;
+
+}
+
+/* HOME */
+
+.homeButton{
+
+    background:#ff2d95;
+
+    color:white;
+
+    border:none;
+
+    padding:18px 34px;
+
+    border-radius:14px;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.homeButton:hover{
+
+    background:#ff54a8;
+
+}
+
+/* CHIUDI */
+
+.closeButton{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    border:3px solid #ff2d95;
+
+    background:#111;
+
+    color:white;
+
+    font-size:40px;
+
+    cursor:pointer;
+
+}
+
+.closeButton:hover{
+
+    background:#ff2d95;
+
+}
+
+/* VIDEO */
+
+.modal iframe{
+
+    position:absolute;
+
+    top:88px;
+
+    left:0;
+
+    width:100%;
+
+    height:calc(100% - 88px);
+
+    border:none;
+
+}
+
+/*=========================
+BARRA PLAYER
+=========================*/
+
+.player-bar{
+
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:72px;
+
+    background:#111;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 25px;
+
+    border-bottom:1px solid #2a2a2a;
+
     z-index:10000;
+
+}
+
+.player-home{
+
+    background:#E50914;
+    color:white;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    font-size:17px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.player-home:hover{
+
+    background:#ff2330;
+
+}
+
+.player-center{
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+}
+
+.player-close{
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    border:none;
+
+    background:#333;
+
+    color:white;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.player-close:hover{
+
+    background:#E50914;
+
+}
+
+.modal iframe{
+
+    position:absolute;
+
+    top:72px;
+    left:0;
+
+    width:100%;
+    height:calc(100% - 72px);
+
+    border:none;
+
+}
+
+/*======================================
+FINE VIDEO - BRIDEFLIX
+======================================*/
+
+.end-screen{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.93);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:200000;
+
+}
+
+.end-content{
+
+    width:700px;
+
+    text-align:center;
+
+}
+
+.end-content h1{
+
+    font-size:48px;
+
+    color:#ff4fa6;
+
+    margin-bottom:30px;
+
+}
+
+.end-content p{
+
+    font-size:22px;
+
+    color:#ddd;
+
+    line-height:1.6;
+
+    margin-bottom:45px;
+
+}
+
+.end-buttons{
+
+    display:flex;
+
+    gap:25px;
+
+    justify-content:center;
+
+}
+
+.end-buttons button{
+
+    background:#ff2d95;
+
+    color:white;
+
+    border:none;
+
+    padding:18px 35px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    transition:.3s;
+
+}
+
+.end-buttons button:hover{
+
+    transform:scale(1.05);
 
 }
 

@@ -20,12 +20,11 @@
     </div>
 
     <nav>
-
         <a href="#">Home</a>
-        <a href="#video">Video</a>
-        <a href="#gallery">Foto</a>
-        <a href="#about">La nostra storia</a>
-
+        <a href="#party">Bride Independence Party</a>
+        <a href="#nautoscopio">Nautoscopio</a>
+        <a href="#matrimonio">Il Matrimonio</a>
+        <a href="#speciali">Contenuti Speciali</a>
     </nav>
 
 </header>
@@ -37,30 +36,20 @@
     <div class="hero-content">
 
         <span class="featured">
-            EVENTO ESCLUSIVO
+            LUGLIO 2026
         </span>
 
         <h1>Emanuela ❤️ Lucia</h1>
 
         <p>
-
             Benvenuti nella piattaforma ufficiale del nostro matrimonio.
-            Qui troverete tutti i momenti più belli della nostra giornata.
-
+            Qui troverete tutti i momenti più belli da ricordare.
         </p>
 
         <div class="buttons">
 
             <button id="watchTrailer" class="play">
-
                 ▶ Guarda il Trailer
-
-            </button>
-
-            <button class="info">
-
-                ℹ Scopri di più
-
             </button>
 
         </div>
@@ -69,109 +58,135 @@
 
 </section>
 
-<section class="section" id="video">
+<!-- ========================= -->
+<!-- BRIDE INDEPENDENCE PARTY -->
+<!-- ========================= -->
 
-<h2>Video del Matrimonio</h2>
+<section class="section" id="party">
 
-<div class="cards">
+<h2>🏳️‍🌈 THE BRIDE INDEPENDENCE PARTY 🏳️‍🌈</h2>
 
-<div class="card">
-
-<img src="images/TRAILER.png">
-
-<h3>Trailer</h3>
-
-</div>
-
-<div class="card">
-
-<img src="images/CERIMONIA.png">
-
-<h3>Cerimonia</h3>
-
-</div>
-
-<div class="card">
-
-<img src="images/RICEVIMENTO.png">
-
-<h3>Ricevimento</h3>
-
-</div>
-
-<div class="card">
-
-<img src="images/BACKSTAGE.jpeg">
-
-<h3>Backstage</h3>
-
-</div>
-
-<div class="card">
-
-<img src="images/PARTY.png">
-
-<h3>Party</h3>
-
-</div>
-
-</div>
+<div class="cards" id="partyCards"></div>
 
 </section>
 
-<section class="section" id="gallery">
+<!-- ========================= -->
+<!-- NAUTOSCOPIO -->
+<!-- ========================= -->
 
-<h2>Galleria Fotografica</h2>
+<section class="section" id="nautoscopio">
 
-<p class="coming">
+<h2>🌊 NAUTOSCOPIO 🌊</h2>
 
-Le fotografie saranno disponibili a breve.
-
-</p>
+<div class="cards" id="nautoscopioCards"></div>
 
 </section>
 
-<section class="section" id="about">
+<!-- ========================= -->
+<!-- MATRIMONIO -->
+<!-- ========================= -->
 
-<h2>La nostra storia</h2>
+<section class="section" id="matrimonio">
 
-<p class="story">
+<h2>💍 IL MATRIMONIO 💍</h2>
 
-Ogni grande storia merita di essere raccontata.
+<div class="cards" id="weddingCards"></div>
 
-Grazie per essere qui con noi.
+</section>
 
-</p>
+<!-- ========================= -->
+<!-- CONTENUTI SPECIALI -->
+<!-- ========================= -->
+
+<section class="section" id="speciali">
+
+<h2>⭐ CONTENUTI SPECIALI ⭐</h2>
+
+<div class="cards" id="specialCards"></div>
 
 </section>
 
 <footer>
 
-<p>
-
-© 2026 BRIDEFLIX
-
-</p>
+    <p>
+        © 2026 BRIDEFLIX
+    </p>
 
 </footer>
 
+<!-- POPUP VIDEO -->
+
+
 <div id="videoModal" class="modal">
 
-<div class="modal-content">
+    <div class="modal-content">
 
-<span class="close">&times;</span>
+        <div class="player-header">
 
-<iframe
+            <button id="goHome" class="homeButton">
 
-id="trailerVideo"
+                TORNA ALLA HOME
 
-src="https://www.youtube.com/embed/iRvdNalM-To"
+            </button>
 
-allowfullscreen>
+            <div class="playerLogo">
 
-</iframe>
+                BRIDEFLIX
+
+            </div>
+
+            <button class="close closeButton">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <iframe
+            id="trailerVideo"
+            src=""
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+        </iframe>
+
+    </div>
 
 </div>
+
+<div id="videoEndScreen" class="end-screen">
+
+    <div class="end-content">
+
+        <h1>❤️ Grazie per aver condiviso questo momento con noi ❤️</h1>
+
+        <p>
+
+            Speriamo che questi ricordi vi accompagnino
+            ancora per tantissimo tempo.
+
+        </p>
+
+        <div class="end-buttons">
+
+            <button id="nextVideoBtn">
+
+                ▶ Guarda il prossimo video
+
+            </button>
+
+            <button id="homeBtn">
+
+                🏠 Torna alla Home
+
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
