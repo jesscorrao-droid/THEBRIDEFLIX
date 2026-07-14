@@ -182,3 +182,73 @@ if ("serviceWorker" in navigator) {
     });
 
 }
+
+/* =====================================================
+   BRIDEFLIX TV MODE - STEP 1
+===================================================== */
+
+let focusedCard = 0;
+let cards = [];
+
+function updateFocus() {
+
+    cards = [...document.querySelectorAll(".card")];
+
+    if (!cards.length) return;
+
+    cards.forEach(card => card.classList.remove("tv-focus"));
+
+    if (focusedCard < 0) focusedCard = 0;
+
+    if (focusedCard >= cards.length)
+        focusedCard = cards.length - 1;
+
+    cards[focusedCard].classList.add("tv-focus");
+
+    cards[focusedCard].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center"
+    });
+
+}
+
+window.addEventListener("load", () => {
+
+    setTimeout(updateFocus, 500);
+
+});
+
+document.addEventListener("keydown", e => {
+
+    cards = [...document.querySelectorAll(".card")];
+
+    if (!cards.length) return;
+
+    switch (e.key) {
+
+        case "ArrowRight":
+
+            focusedCard++;
+            updateFocus();
+            break;
+
+        case "ArrowLeft":
+
+            focusedCard--;
+            updateFocus();
+            break;
+
+        case "Enter":
+
+            cards[focusedCard].click();
+            break;
+
+        case "Escape":
+
+            closeVideo();
+            break;
+
+    }
+
+});
