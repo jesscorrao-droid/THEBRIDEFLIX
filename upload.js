@@ -34,14 +34,15 @@ async function uploadPhoto() {
 
     const { error: dbError } = await sb
         .from("dediche")
+       
         .insert([
-            {
-                nome,
-                messaggio,
-                foto: data.publicUrl,
-                approvata: false
-            }
-        ]);
+    {
+        nome,
+        messaggio,
+        foto: data.publicUrl,
+        approvata: true
+    }
+]);
 
     if (dbError) {
         console.error(dbError);
