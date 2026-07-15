@@ -187,66 +187,150 @@ if ("serviceWorker" in navigator) {
    BRIDEFLIX TV MODE - STEP 1
 ===================================================== */
 
-let focusedCard = 0;
+let currentCard = null;
 let cards = [];
 
-function updateFocus() {
+function updateFocus(card = null) {
 
     cards = [...document.querySelectorAll(".card")];
 
     if (!cards.length) return;
 
-    cards.forEach(card => card.classList.remove("tv-focus"));
+    cards.forEach(c => c.classList.remove("tv-focus"));
 
-    if (focusedCard < 0) focusedCard = 0;
+    if (!currentCard) {
 
-    if (focusedCard >= cards.length)
-        focusedCard = cards.length - 1;
+        currentCard = cards[0];
 
-    cards[focusedCard].classList.add("tv-focus");
+    }
 
-    cards[focusedCard].scrollIntoView({
+    if (card) {
+
+        currentCard = card;
+
+    }
+
+    currentCard.classList.add("tv-focus");
+
+    currentCard.scrollIntoView({
+
         behavior: "smooth",
         block: "nearest",
         inline: "center"
+
     });
 
 }
 
 window.addEventListener("load", () => {
 
-    setTimeout(updateFocus, 500);
+    setTimeout(() => {
+
+        cards = [...document.querySelectorAll(".card")];
+
+        if (cards.length) {
+
+            updateFocus(cards[0]);
+
+        }
+
+    }, 500);
 
 });
+
+function findClosestCard(direction) {
+
+    const currentRect = currentCard.getBoundingClientRect();
+
+    let candidate = null;
+    let bestDistance = Infinity;
+
+    cards.forEach(card => {
+
+        if (card === currentCard) return;
+
+        const rect = card.getBoundingClientRect();
+
+        let valid = false;
+
+        switch(direction){
+
+            case "up":
+                valid = rect.top < currentRect.top - 20;
+                break;
+
+            case "down":
+                valid = rect.top > currentRect.top + 20;
+                break;
+
+        }
+
+        if(!valid) return;
+
+        const distance = Math.abs(rect.top-currentRect.top)
+                       + Math.abs(rect.left-currentRect.left);
+
+        if(distance < bestDistance){
+
+            bestDistance = distance;
+            candidate = card;
+
+        }
+
+    });
+
+    return candidate;
+
+}
 
 document.addEventListener("keydown", e => {
 
     cards = [...document.querySelectorAll(".card")];
 
-    if (!cards.length) return;
+    if (!cards.length || !currentCard) return;
+
+    let currentIndex = cards.indexOf(currentCard);
 
     switch (e.key) {
 
         case "ArrowRight":
 
-            focusedCard++;
-            updateFocus();
+            e.preventDefault();
+
+            if (currentIndex < cards.length - 1) {
+
+                updateFocus(cards[currentIndex + 1]);
+
+            }
+
             break;
 
         case "ArrowLeft":
 
-            focusedCard--;
-            updateFocus();
+            e.preventDefault();
+
+            if (currentIndex > 0) {
+
+                updateFocus(cards[currentIndex - 1]);
+
+            }
+
             break;
 
         case "Enter":
 
-            cards[focusedCard].click();
+            e.preventDefault();
+
+            currentCard.click();
+
             break;
 
         case "Escape":
 
+            e.preventDefault();
+
             closeVideo();
+
             break;
 
     }
