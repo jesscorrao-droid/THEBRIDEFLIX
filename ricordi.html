@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Ricordi del nostro giorno</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+background:#141414;
+color:white;
+
+font-family:Montserrat,sans-serif;
+
+padding:60px;
+
+}
+
+h1{
+
+font-family:"Playfair Display",serif;
+
+font-size:54px;
+
+margin-bottom:15px;
+
+}
+
+.subtitle{
+
+opacity:.7;
+
+margin-bottom:50px;
+
+font-size:22px;
+
+}
+
+#gallery{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fill,minmax(360px,1fr));
+
+gap:35px;
+
+}
+
+.card{
+
+background:#1f1f1f;
+
+border-radius:22px;
+
+overflow:hidden;
+
+box-shadow:0 10px 35px rgba(0,0,0,.35);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+}
+
+.card img{
+
+width:100%;
+
+height:260px;
+
+object-fit:cover;
+
+}
+
+.content{
+
+padding:25px;
+
+}
+
+.message{
+
+font-size:22px;
+
+line-height:1.6;
+
+font-family:"Playfair Display",serif;
+
+margin-bottom:25px;
+
+}
+
+.author{
+
+text-align:right;
+
+opacity:.8;
+
+font-size:18px;
+
+}
+
+.date{
+
+margin-top:15px;
+
+font-size:14px;
+
+opacity:.55;
+
+text-align:right;
+
+}
+
+#viewer{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.92);
+
+display:none;
+
+justify-content:center;
+align-items:center;
+
+flex-direction:column;
+
+z-index:9999;
+
+padding:40px;
+
+}
+
+#viewerImage{
+
+max-width:85%;
+
+max-height:65vh;
+
+border-radius:20px;
+
+box-shadow:0 20px 80px rgba(0,0,0,.6);
+
+}
+
+#viewerInfo{
+
+margin-top:35px;
+
+max-width:900px;
+
+text-align:center;
+
+}
+
+#viewerMessage{
+
+font-size:34px;
+
+font-family:"Playfair Display",serif;
+
+line-height:1.5;
+
+}
+
+#viewerAuthor{
+
+margin-top:25px;
+
+font-size:22px;
+
+opacity:.8;
+
+}
+
+#viewerDate{
+
+margin-top:10px;
+
+opacity:.5;
+
+}
+
+#closeViewer{
+
+position:absolute;
+
+top:35px;
+right:45px;
+
+font-size:46px;
+
+cursor:pointer;
+
+color:white;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>❤️ Ricordi del nostro giorno</h1>
+
+<div class="subtitle">
+
+Le fotografie e le dediche condivise dai nostri ospiti.
+
+</div>
+
+<div id="gallery"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+<script src="ricordi.js"></script>
+
+<div id="viewer">
+
+    <span id="closeViewer">✕</span>
+
+    <img id="viewerImage">
+
+    <div id="viewerInfo">
+
+        <div id="viewerMessage"></div>
+
+        <div id="viewerAuthor"></div>
+
+        <div id="viewerDate"></div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
