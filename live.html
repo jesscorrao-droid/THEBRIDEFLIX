@@ -302,6 +302,169 @@ transform:scale(1);
 
 }
 
+#welcomeScreen{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+z-index:100;
+
+background:
+radial-gradient(circle at top,
+#ff9fc7 0%,
+#f96aa8 20%,
+#e2448b 45%,
+#b61f68 75%,
+#6d093b 100%);
+
+color:white;
+
+overflow:hidden;
+
+}
+
+#welcomeScreen::before{
+
+content:"";
+
+position:absolute;
+
+width:900px;
+height:900px;
+
+border-radius:50%;
+
+background:
+radial-gradient(circle,
+rgba(255,255,255,.12),
+transparent 70%);
+
+top:-250px;
+right:-200px;
+
+filter:blur(70px);
+
+}
+
+#welcomeScreen::after{
+
+content:"";
+
+position:absolute;
+
+width:700px;
+height:700px;
+
+border-radius:50%;
+
+background:
+radial-gradient(circle,
+rgba(255,45,149,.18),
+transparent 70%);
+
+bottom:-180px;
+left:-150px;
+
+filter:blur(60px);
+
+}
+
+#welcomeScreen h1{
+
+font-family:"Playfair Display",serif;
+
+font-size:88px;
+
+font-weight:700;
+
+color:white;
+
+text-shadow:
+0 4px 12px rgba(0,0,0,.45);
+
+}
+
+#welcomeScreen h2{
+
+position:relative;
+z-index:2;
+
+font-size:42px;
+
+font-weight:500;
+
+letter-spacing:5px;
+
+text-transform:uppercase;
+
+margin-bottom:40px;
+
+opacity:.95;
+
+}
+
+#welcomeQR{
+
+position:relative;
+z-index:2;
+
+width:260px;
+
+height:260px;
+
+background:white;
+
+padding:15px;
+
+border-radius:24px;
+
+box-shadow:0 20px 70px rgba(0,0,0,.35);
+
+animation:pulse 3s infinite;
+
+}
+
+#welcomeScreen p{
+
+position:relative;
+z-index:2;
+
+margin-top:35px;
+
+font-size:34px;
+
+line-height:1.45;
+
+max-width:900px;
+
+font-weight:400;
+
+}
+
+
+@keyframes pulse{
+
+0%{transform:scale(1);}
+50%{transform:scale(1.04);}
+100%{transform:scale(1);}
+
+}
+
 </style>
 
 </head>
@@ -310,15 +473,17 @@ transform:scale(1);
 
 <div id="background"></div>
 
-<div id="waiting">
+<div id="welcomeScreen">
 
     <h1>Emanuela ❤️ Lucia</h1>
 
-    <h2>Condividi i tuoi ricordi</h2>
+    <h2>WEDDING DEDICATIONS</h2>
+
+    <img src="images/qrcode_brideflix.png" id="welcomeQR">
 
     <p>
-        Scatta una foto, lascia una dedica
-        e diventa parte del nostro film.
+        Inquadrate il QR Code<br>
+        e condividete le vostre foto con una dedica.
     </p>
 
 </div>

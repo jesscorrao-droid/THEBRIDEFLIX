@@ -12,12 +12,15 @@ const dedica = document.getElementById("dedica");
 const messaggio = document.getElementById("messaggio");
 const nome = document.getElementById("nome");
 
+const welcome = document.getElementById("welcomeScreen");
+const container = document.getElementById("container");
+const qrBox = document.getElementById("qr-box");
+
 async function caricaDediche() {
 
     const { data, error } = await sb
         .from("dediche")
         .select("*")
-        .eq("approvata", true)
         .order("id", { ascending: true });
 
     if (error) {
@@ -31,20 +34,20 @@ async function caricaDediche() {
 
 function mostraFoto() {
 
-   const waiting = document.getElementById("waiting");
-const container = document.getElementById("container");
+    if (elenco.length === 0) {
 
-if (elenco.length === 0){
+        welcome.style.display = "flex";
+        container.style.display = "none";
 
-    waiting.style.display = "block";
-    container.style.display = "none";
+        if (qrBox) qrBox.style.display = "none";
 
-    return;
+        return;
+    }
 
-}
+    welcome.style.display = "none";
+    container.style.display = "flex";
 
-waiting.style.display = "none";
-container.style.display = "flex";
+    if (qrBox) qrBox.style.display = "flex";
 
     if (indice >= elenco.length)
         indice = 0;
@@ -61,9 +64,9 @@ container.style.display = "flex";
         sfondo.style.backgroundImage =
             `url('${item.foto}')`;
 
-        messaggio.innerHTML = "❝ " + item.messaggio;
+        messaggio.innerHTML = "❝ " + (item.messaggio || "");
 
-        nome.innerHTML = "— " + item.nome + " ❤️";
+        nome.innerHTML = "— " + (item.nome || "") + " ❤️";
 
         foto.style.animation = "none";
         foto.offsetHeight;
@@ -90,4 +93,4 @@ async function aggiorna(){
 
 aggiorna();
 
-setInterval(aggiorna,8000);
+setInterval(aggiorna,5000);
