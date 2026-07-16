@@ -35,18 +35,18 @@ body{
 
 .background{
 
-    position:fixed;
+position:fixed;
+inset:0;
 
-    inset:0;
+background:
+radial-gradient(circle at top,
+#ff8fb8 0%,
+#e95091 25%,
+#b32167 55%,
+#6f123f 82%,
+#2a0618 100%);
 
-    background:
-    radial-gradient(circle at top,
-    #ffd8e8 0%,
-    #ffb8d6 25%,
-    #f77ab0 65%,
-    #d93f88 100%);
-
-    z-index:-3;
+overflow:hidden;
 
 }
 
@@ -54,43 +54,41 @@ body{
 
 .background::before{
 
-    content:"";
+content:"";
 
-    position:absolute;
+position:absolute;
 
-    width:700px;
-    height:700px;
+width:700px;
+height:700px;
 
-    border-radius:50%;
+top:-250px;
+left:-200px;
 
-    background:rgba(255,255,255,.15);
+border-radius:50%;
 
-    border:1px solid rgba(255,255,255,.35);
+background:rgba(255,255,255,.18);
 
-    filter:blur(120px);
-
-    top:-250px;
-    left:-200px;
+filter:blur(120px);
 
 }
 
 .background::after{
 
-    content:"";
+content:"";
 
-    position:absolute;
+position:absolute;
 
-    width:600px;
-    height:600px;
+width:600px;
+height:600px;
 
-    border-radius:50%;
+right:-150px;
+bottom:-150px;
 
-    background:rgba(255,255,255,.18);
+border-radius:50%;
 
-    filter:blur(100px);
+background:rgba(255,255,255,.10);
 
-    right:-180px;
-    bottom:-150px;
+filter:blur(120px);
 
 }
 
