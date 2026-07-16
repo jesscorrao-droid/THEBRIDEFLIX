@@ -1,45 +1,140 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Invia una dedica</title>
+<title>Emanuela ❤️ Lucia</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="upload.css">
 
 </head>
 
 <body>
 
-<div class="upload-page">
+<div class="background"></div>
 
-<h1>📸 Condividi un ricordo</h1>
+<div class="flowers flowers-left"></div>
+<div class="flowers flowers-right"></div>
 
-<p>
-Carica una foto e lascia una dedica alle spose ❤️
-</p>
+<div class="card">
 
-<input
-type="text"
-id="nome"
-placeholder="Il tuo nome">
+    <h1>Emanuela ❤️ Lucia</h1>
 
-<textarea
-id="messaggio"
-placeholder="Scrivi una dedica..."></textarea>
+    <h2>Share Your Memories</h2>
 
-<input
-type="file"
-id="foto"
-accept="image/*">
+    <p class="subtitle">
 
-<button id="invia">
-INVIA
-</button>
+        Ogni fotografia racconta un'emozione.<br>
+
+        Condividete con noi il vostro ricordo di questa giornata speciale.
+
+    </p>
+
+    <label for="foto" class="upload-box">
+
+        <div id="previewContainer">
+
+            <img id="preview">
+
+            <div id="placeholder">
+
+                <div class="camera">
+
+                    📸
+
+                </div>
+
+                <strong>Scegli una foto</strong>
+
+                <span>Tocca qui per selezionarla</span>
+
+            </div>
+
+        </div>
+
+    </label>
+
+    <input
+        type="file"
+        id="foto"
+        accept="image/*">
+
+    <div class="field">
+
+        <label>Il tuo nome</label>
+
+        <input
+            type="text"
+            id="nome"
+            maxlength="40"
+            placeholder="Scrivi il tuo nome">
+
+    </div>
+
+    <div class="field">
+
+        <label>La tua dedica</label>
+
+        <textarea
+            id="messaggio"
+            maxlength="300"
+            placeholder="Scrivi una dedica alle spose..."></textarea>
+
+        <div id="counter">
+
+            0 / 300
+
+        </div>
+
+    </div>
+
+    <button id="invia">
+
+        ❤️ Invia la dedica
+
+    </button>
 
 </div>
+
+<script>
+
+const foto=document.getElementById("foto");
+const preview=document.getElementById("preview");
+const placeholder=document.getElementById("placeholder");
+
+foto.addEventListener("change",()=>{
+
+const file=foto.files[0];
+
+if(!file)return;
+
+preview.src=URL.createObjectURL(file);
+
+preview.style.display="block";
+
+placeholder.style.display="none";
+
+});
+
+const txt=document.getElementById("messaggio");
+
+const counter=document.getElementById("counter");
+
+txt.addEventListener("input",()=>{
+
+counter.innerHTML=txt.value.length+" / 300";
+
+});
+
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -48,4 +143,5 @@ INVIA
 <script src="upload.js"></script>
 
 </body>
+
 </html>

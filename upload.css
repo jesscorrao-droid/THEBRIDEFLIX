@@ -1,0 +1,380 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+
+    width:100%;
+    min-height:100%;
+
+    font-family:"Montserrat",sans-serif;
+
+    overflow-x:hidden;
+
+    background:#f7b8d1;
+
+}
+
+body{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:50px 20px;
+
+    position:relative;
+
+}
+
+/* SFONDO */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle at top,
+    #ffd8e8 0%,
+    #ffb8d6 25%,
+    #f77ab0 65%,
+    #d93f88 100%);
+
+    z-index:-3;
+
+}
+
+/* LUCI */
+
+.background::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+    height:700px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.15);
+
+    border:1px solid rgba(255,255,255,.35);
+
+    filter:blur(120px);
+
+    top:-250px;
+    left:-200px;
+
+}
+
+.background::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:600px;
+    height:600px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.18);
+
+    filter:blur(100px);
+
+    right:-180px;
+    bottom:-150px;
+
+}
+
+/* CARD */
+
+.card{
+
+    width:min(700px,95vw);
+
+    background:rgba(255,255,255,.20);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:32px;
+
+    padding:45px;
+
+    box-shadow:
+    0 25px 70px rgba(0,0,0,.18);
+
+}
+
+/* TITOLI */
+
+h1{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:60px;
+
+    text-align:center;
+
+    color:white;
+
+    margin-bottom:8px;
+
+}
+
+h2{
+
+    text-align:center;
+
+    color:white;
+
+    letter-spacing:4px;
+
+    font-weight:500;
+
+    margin-bottom:20px;
+
+}
+
+.subtitle{
+
+    color:white;
+
+    text-align:center;
+
+    line-height:1.7;
+
+    margin-bottom:35px;
+
+    opacity:.95;
+
+}
+
+/* UPLOAD */
+
+.upload-box{
+
+    display:block;
+
+    cursor:pointer;
+
+}
+
+#foto{
+
+    display:none;
+
+}
+
+#previewContainer{
+
+    width:100%;
+
+    height:320px;
+
+    border:3px dashed rgba(255,255,255,.6);
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.15);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    transition:.3s;
+
+}
+
+#previewContainer:hover{
+
+    background:rgba(255,255,255,.22);
+
+}
+
+#preview{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:none;
+
+}
+
+#placeholder{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    color:white;
+
+    gap:15px;
+
+}
+
+.camera{
+
+    font-size:65px;
+
+}
+
+/* CAMPI */
+
+.field{
+
+    margin-top:28px;
+
+}
+
+.field label{
+
+    display:block;
+
+    color:white;
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+}
+
+input,
+textarea{
+
+    width:100%;
+
+    border:none;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    font-size:18px;
+
+    outline:none;
+
+    background:white;
+
+}
+
+textarea{
+
+    resize:none;
+
+    min-height:170px;
+
+}
+
+/* CONTATORE */
+
+#counter{
+
+    margin-top:8px;
+
+    text-align:right;
+
+    color:white;
+
+    opacity:.8;
+
+}
+
+/* PULSANTE */
+
+button{
+
+    width:100%;
+
+    margin-top:35px;
+
+    border:none;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    font-size:24px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+    linear-gradient(135deg,
+    #ff5da2,
+    #d62d7d);
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:translateY(-4px) scale(1.02);
+
+    box-shadow:
+    0 20px 35px rgba(214,45,125,.35);
+
+}
+
+.flowers{
+
+position:fixed;
+
+top:0;
+
+width:360px;
+
+height:100%;
+
+background-repeat:no-repeat;
+
+background-size:contain;
+
+pointer-events:none;
+
+z-index:-1;
+
+opacity:.95;
+
+}
+
+.flowers-left{
+
+left:0;
+
+background-image:url("images/bougainville-left.png");
+
+background-position:left top;
+
+}
+
+.flowers-right{
+
+right:0;
+
+background-image:url("images/bougainville-right.png");
+
+background-position:right top;
+
+transform:scaleX(-1);
+
+}
