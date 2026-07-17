@@ -32,8 +32,8 @@
     <nav>
         <a href="#">Home</a>
         <a href="#party">Bride Independence Party</a>
-        <a href="#nautoscopio">Nautoscopio</a>
         <a href="#matrimonio">Il Matrimonio</a>
+        <a href="#dediche">Wedding Dedications</a>
         <a href="#speciali">Contenuti Speciali</a>
     </nav>
 
@@ -76,21 +76,8 @@
 
 <section class="section" id="party">
 
-<h2>🏳️‍🌈 THE BRIDE INDEPENDENCE PARTY 🏳️‍🌈</h2>
-
-<div class="cards" id="partyCards"></div>
-
-</section>
-
-<!-- ========================= -->
-<!-- NAUTOSCOPIO -->
-<!-- ========================= -->
-
-<section class="section" id="nautoscopio">
-
-<h2>🌊 NAUTOSCOPIO 🌊</h2>
-
-<div class="cards" id="nautoscopioCards"></div>
+<h2>🏳️‍🌈BRIDE INDEPENDENCE DAY🏳️‍🌈 & NAUTOSCOPIO</h2>
+<div id="partyRow" class="row"></div>
 
 </section>
 
@@ -106,6 +93,34 @@
 
 </section>
 
+<section class="section" id="dediche">
+
+    <h2>💌 WEDDING DEDICATIONS 💌</h2>
+
+  <div class="cards">
+
+    <div id="dedicationCard" class="card dedication-card">
+
+        <img
+            src="images/DEDICATIONCOVER.png"
+            alt="Wedding Dedications">
+
+        <div class="dedication-overlay">
+
+            <h3>💌 Wedding Dedications</h3>
+
+            <p id="dedicationCounter">
+                Caricamento...
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
 <!-- ========================= -->
 <!-- CONTENUTI SPECIALI -->
 <!-- ========================= -->
@@ -117,8 +132,6 @@
 <div class="cards" id="specialCards"></div>
 
 </section>
-
-
 
 <footer>
 
@@ -197,6 +210,30 @@
                 🏠 Torna alla Home
 
             </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- POPUP DEDICHE -->
+<!-- ===================================== -->
+
+<div id="dedicaModal" class="modal">
+
+    <div class="modal-content dedica-content">
+
+        <button id="closeDedica" class="closeButton">✕</button>
+
+        <img id="dedicaFoto" src="" alt="Dedica">
+
+        <div class="dedicaTesto">
+
+            <h2 id="dedicaNome"></h2>
+
+            <p id="dedicaMessaggio"></p>
 
         </div>
 

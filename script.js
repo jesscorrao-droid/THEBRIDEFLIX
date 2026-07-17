@@ -13,6 +13,11 @@ const closeButton = document.querySelector(".close");
 const homeButton = document.getElementById("goHome");
 let lastScrollPosition = 0;
 
+// SUPABASE
+const sb = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
 // ----------------------------
@@ -70,6 +75,54 @@ document.addEventListener("keydown",(e)=>{
 
 });
 
+// ===========================
+// DEDICHE
+// ===========================
+
+const dedicaModal=document.getElementById("dedicaModal");
+
+const dedicaFoto=document.getElementById("dedicaFoto");
+
+const dedicaNome=document.getElementById("dedicaNome");
+
+const dedicaMessaggio=document.getElementById("dedicaMessaggio");
+
+const closeDedica=document.getElementById("closeDedica");
+
+function openDedica(d){
+
+    dedicaFoto.src=d.foto;
+
+    dedicaNome.innerText=d.nome;
+
+    dedicaMessaggio.innerText=d.messaggio;
+
+    dedicaModal.style.display="block";
+
+    document.body.style.overflow="hidden";
+
+}
+
+function closeDedicaModal(){
+
+    dedicaModal.style.display="none";
+
+    document.body.style.overflow="auto";
+
+}
+
+closeDedica.addEventListener("click",closeDedicaModal);
+
+window.addEventListener("click",(e)=>{
+
+    if(e.target===dedicaModal){
+
+        closeDedicaModal();
+
+    }
+
+});
+
 // ----------------------------
 // TORNA ALLA HOME
 // ----------------------------
@@ -114,8 +167,7 @@ window.addEventListener("scroll",()=>{
 // CREAZIONE AUTOMATICA CARD
 // ----------------------------
 
-createCategory("party","partyCards");
-createCategory("nautoscopio","nautoscopioCards");
+createCategory("party", "partyRow");
 createCategory("wedding","weddingCards");
 createCategory("special","specialCards");
 
@@ -336,3 +388,141 @@ document.addEventListener("keydown", e => {
     }
 
 });
+
+async function caricaDediche(){
+
+    const { data, error } = await sb
+        .from("dediche")
+        .select("*")
+        .order("id", { ascending:false });
+
+    if(error){
+
+        console.log(error);
+
+        return;
+
+    }
+
+    const row = document.getElementById("dediche-row");
+
+    row.innerHTML="";
+
+   data.forEach(d => {
+
+    const card = document.createElement("div");
+
+    card.className = "card dedica-card";
+
+    card.innerHTML = `
+        <img src="${d.foto}" alt="${d.nome}">
+        <h3>${d.nome}</h3>
+    `;
+
+    card.addEventListener("click", () => {
+        openDedica(d);
+    });
+
+    row.appendChild(card);
+
+});
+
+}
+
+async function caricaWeddingDedications() {
+
+    const { data, error } = await sb
+        .from("dediche")
+        .select("*")
+        .order("id", { ascending: false });
+
+    if (error) {
+
+        console.log(error);
+
+        return;
+
+    }
+
+    const box = document.getElementById("dedicheHome");
+
+    if (!box) return;
+
+    const totale = data.length;
+
+    const immagini = data.slice(0, 4);
+
+    box.innerHTML = `
+
+        <div class="dediche-home-card">
+
+            <div class="dediche-collage">
+
+                ${immagini.map(d=>`
+                    <img src="${d.foto}">
+                `).join("")}
+
+            </div>
+
+            <div class="dediche-info">
+
+                <h3>❤️ ${totale} Wedding Memories</h3>
+
+                <p>
+                    Guarda tutte le fotografie e le dediche
+                    lasciate dagli invitati.
+                </p>
+
+                <button class="playDediche">
+
+                    ▶ APRI
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    box.querySelector(".playDediche").addEventListener("click",()=>{
+
+        window.location="dediche.html";
+
+    });
+
+}
+
+async function aggiornaContatoreDediche(){
+
+    const { count, error } = await sb
+        .from("dediche")
+        .select("*",{
+            count:"exact",
+            head:true
+        });
+
+    if(error){
+
+        console.log(error);
+        return;
+
+    }
+
+    const counter = document.getElementById("dedicationCounter");
+
+    if(counter){
+
+        counter.innerHTML = `❤️ ${count} Wedding Memories`;
+
+    }
+
+}
+
+aggiornaContatoreDediche();
+
+document.getElementById("dedicationCard").onclick = () => {
+
+    window.location = "ricordi.html";
+
+};

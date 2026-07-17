@@ -53,13 +53,9 @@ const videos = [
     youtube:"https://www.youtube.com/embed/Zz2-6TFYEjI?si=UWE52wTdz5mQJEo1&autoplay=1"
 },
 
-/* ===============================
-   NAUTOSCOPIO
-================================ */
-
 {
-    category:"nautoscopio",
-    title:"GAME SHOW",
+    category:"party",
+    title:"NAUTOSCOPIO",
     image:"images/nautoscopio.jpg",
     youtube:"https://www.youtube.com/embed/46mrm3n6BME?si=pFLyNIt8jQgD3bxv&autoplay=1"
 },

@@ -283,6 +283,36 @@ SEZIONI
 }
 
 /*-------------------------
+RIGHE STILE NETFLIX
+-------------------------*/
+
+.row{
+
+    display:flex;
+
+    gap:20px;
+
+    overflow-x:auto;
+
+    padding-bottom:15px;
+
+    scroll-behavior:smooth;
+
+}
+
+.row::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+.row .card{
+
+    flex:0 0 300px;
+
+}
+
+/*-------------------------
 GRIGLIA VIDEO
 -------------------------*/
 
@@ -1398,4 +1428,243 @@ margin-bottom:90px;
     box-shadow:0 0 30px rgba(255,255,255,.35);
 
 }
+
+.dedica-card{
+
+width:220px;
+
+margin-right:18px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.dedica-card img{
+
+width:100%;
+
+height:320px;
+
+object-fit:cover;
+
+border-radius:18px;
+
+}
+
+.dedica-card:hover{
+
+transform:scale(1.06);
+
+}
+
+.dedica-card h3{
+
+margin-top:10px;
+
+color:white;
+
+text-align:center;
+
+font-size:18px;
+
+}
+
+.dedica-card{
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+.dedica-card img{
+
+width:100%;
+
+aspect-ratio:2/3;
+
+object-fit:cover;
+
+border-radius:12px;
+
+}
+
+.dedica-card h3{
+
+margin-top:12px;
+
+text-align:center;
+
+font-size:18px;
+
+color:white;
+
+font-weight:600;
+
+}
+
+.dedica-card:hover{
+
+transform:scale(1.08);
+
+}
+
+/* =====================================
+   POPUP DEDICHE
+===================================== */
+
+.dedica-content{
+
+max-width:900px;
+
+background:#181818;
+
+border-radius:20px;
+
+overflow:hidden;
+
+position:relative;
+
+animation:zoomIn .35s;
+
+}
+
+#dedicaFoto{
+
+width:100%;
+
+max-height:70vh;
+
+object-fit:cover;
+
+display:block;
+
+}
+
+.dedicaTesto{
+
+padding:35px;
+
+}
+
+#dedicaNome{
+
+font-size:38px;
+
+margin-bottom:20px;
+
+color:white;
+
+}
+
+#dedicaMessaggio{
+
+font-size:24px;
+
+line-height:1.7;
+
+color:#ddd;
+
+white-space:pre-wrap;
+
+}
+
+#closeDedica{
+
+position:absolute;
+
+top:20px;
+
+right:20px;
+
+z-index:20;
+
+}
+
+/*=========================
+WEDDING DEDICATIONS CARD
+=========================*/
+
+.dedication-card{
+
+position:relative;
+
+cursor:pointer;
+
+overflow:hidden;
+
+border-radius:14px;
+
+}
+
+.dedication-card img{
+
+width:100%;
+
+height:320px;
+
+object-fit:cover;
+
+display:block;
+
+transition:.4s;
+
+}
+
+.dedication-card:hover img{
+
+transform:scale(1.08);
+
+}
+
+.dedication-overlay{
+
+position:absolute;
+
+left:0;
+
+right:0;
+
+bottom:0;
+
+padding:25px;
+
+background:linear-gradient(transparent,rgba(0,0,0,.92));
+
+}
+
+.dedication-overlay h3{
+
+font-size:26px;
+
+margin-bottom:10px;
+
+}
+
+.dedication-overlay p{
+
+font-size:18px;
+
+color:#ddd;
+
+}
+
+/* Solo Wedding Dedications */
+
+.dedication-card img{
+
+    width:100%;
+
+    height:260px;
+
+    object-fit:contain;
+
+    background:#181818;
+
+    padding:10px;
+
+}
+
 
