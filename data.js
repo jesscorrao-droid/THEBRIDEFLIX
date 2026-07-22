@@ -67,7 +67,7 @@ const videos = [
 
 {
     category:"wedding",
-    title:"video1",
+    title:"DRONATA ANELLI DI ANTONIO SCANNAVINO",
     image:"images/bride coming soon.png",
     youtube:""
 },
@@ -93,7 +93,7 @@ const videos = [
     category:"special",
     title:"VIDEO REACTION",
     image:"images/REACTION.png",
-    youtube:"https://www.youtube.com/embed/GoYGMUadB5U?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+    youtube:"https://www.youtube.com/embed/kMqGpcWnTMk?autoplay=1&rel=0&modestbranding=1&playsinline=1"
 },
 
 {
