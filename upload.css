@@ -5,96 +5,95 @@
 }
 
 html,body{
-
     width:100%;
     min-height:100%;
-
     font-family:"Montserrat",sans-serif;
-
     overflow-x:hidden;
-
     background:#f7b8d1;
-
 }
 
 body{
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     padding:50px 20px;
-
     position:relative;
-
 }
 
-/* SFONDO */
+/* ==========================
+   SFONDO
+========================== */
 
 .background{
 
-position:fixed;
-inset:0;
+    position:fixed;
+    inset:0;
 
-background:
-radial-gradient(circle at top,
-#ff8fb8 0%,
-#e95091 25%,
-#b32167 55%,
-#6f123f 82%,
-#2a0618 100%);
+    background:
+    radial-gradient(circle at top,
+    #ff8fb8 0%,
+    #e95091 25%,
+    #b32167 55%,
+    #6f123f 82%,
+    #2a0618 100%);
 
-overflow:hidden;
+    overflow:hidden;
+
+    z-index:-2;
+
+    pointer-events:none;
 
 }
 
-/* LUCI */
-
 .background::before{
 
-content:"";
+    content:"";
 
-position:absolute;
+    position:absolute;
 
-width:700px;
-height:700px;
+    width:700px;
+    height:700px;
 
-top:-250px;
-left:-200px;
+    top:-250px;
+    left:-200px;
 
-border-radius:50%;
+    border-radius:50%;
 
-background:rgba(255,255,255,.18);
+    background:rgba(255,255,255,.18);
 
-filter:blur(120px);
+    filter:blur(120px);
 
 }
 
 .background::after{
 
-content:"";
+    content:"";
 
-position:absolute;
+    position:absolute;
 
-width:600px;
-height:600px;
+    width:600px;
+    height:600px;
 
-right:-150px;
-bottom:-150px;
+    right:-150px;
+    bottom:-150px;
 
-border-radius:50%;
+    border-radius:50%;
 
-background:rgba(255,255,255,.10);
+    background:rgba(255,255,255,.10);
 
-filter:blur(120px);
+    filter:blur(120px);
 
 }
 
-/* CARD */
+/* ==========================
+   CARD
+========================== */
 
 .card{
+
+    position:relative;
+
+    z-index:10;
 
     width:min(700px,95vw);
 
@@ -106,12 +105,13 @@ filter:blur(120px);
 
     padding:45px;
 
-    box-shadow:
-    0 25px 70px rgba(0,0,0,.18);
+    box-shadow:0 25px 70px rgba(0,0,0,.18);
 
 }
 
-/* TITOLI */
+/* ==========================
+   TITOLI
+========================== */
 
 h1{
 
@@ -155,7 +155,9 @@ h2{
 
 }
 
-/* UPLOAD */
+/* ==========================
+   UPLOAD
+========================== */
 
 .upload-box{
 
@@ -204,6 +206,7 @@ h2{
 #preview{
 
     width:100%;
+
     height:100%;
 
     object-fit:cover;
@@ -218,11 +221,15 @@ h2{
 
     flex-direction:column;
 
+    justify-content:center;
+
     align-items:center;
 
     color:white;
 
     gap:15px;
+
+    text-align:center;
 
 }
 
@@ -232,7 +239,25 @@ h2{
 
 }
 
-/* CAMPI */
+#selectedCount{
+
+    margin-top:18px;
+
+    text-align:center;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    letter-spacing:.5px;
+
+}
+
+/* ==========================
+   CAMPI
+========================== */
 
 .field{
 
@@ -279,7 +304,9 @@ textarea{
 
 }
 
-/* CONTATORE */
+/* ==========================
+   CONTATORE
+========================== */
 
 #counter{
 
@@ -293,7 +320,9 @@ textarea{
 
 }
 
-/* PULSANTE */
+/* ==========================
+   PULSANTE
+========================== */
 
 button{
 
@@ -315,10 +344,7 @@ button{
 
     color:white;
 
-    background:
-    linear-gradient(135deg,
-    #ff5da2,
-    #d62d7d);
+    background:linear-gradient(135deg,#ff5da2,#d62d7d);
 
     transition:.3s;
 
@@ -328,51 +354,106 @@ button:hover{
 
     transform:translateY(-4px) scale(1.02);
 
-    box-shadow:
-    0 20px 35px rgba(214,45,125,.35);
+    box-shadow:0 20px 35px rgba(214,45,125,.35);
 
 }
 
+/* ==========================
+   BOTTONE RICORDI
+========================== */
+
+.galleryButton{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:100%;
+
+    padding:18px 24px;
+
+    margin-bottom:30px;
+
+    border-radius:18px;
+
+    background:linear-gradient(135deg,#ff5da2,#d62d7d);
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    letter-spacing:.5px;
+
+    box-shadow:0 15px 35px rgba(214,45,125,.35);
+
+    transition:.3s;
+
+}
+
+.galleryButton:hover{
+
+    transform:translateY(-4px) scale(1.02);
+
+    box-shadow:0 22px 45px rgba(214,45,125,.45);
+
+}
+
+.galleryButton:active{
+
+    transform:scale(.98);
+
+}
+
+/* ==========================
+   FIORI
+========================== */
+
 .flowers{
 
-position:fixed;
+    position:fixed;
 
-top:0;
+    top:0;
 
-width:360px;
+    width:360px;
 
-height:100%;
+    height:100%;
 
-background-repeat:no-repeat;
+    background-repeat:no-repeat;
 
-background-size:contain;
+    background-size:contain;
 
-pointer-events:none;
+    pointer-events:none;
 
-z-index:-1;
+    z-index:-1;
 
-opacity:.95;
+    opacity:.95;
 
 }
 
 .flowers-left{
 
-left:0;
+    left:0;
 
-background-image:url("images/bougainville-left.png");
+    background-image:url("images/bougainville-left.png");
 
-background-position:left top;
+    background-position:left top;
 
 }
 
 .flowers-right{
 
-right:0;
+    right:0;
 
-background-image:url("images/bougainville-right.png");
+    background-image:url("images/bougainville-right.png");
 
-background-position:right top;
+    background-position:right top;
 
-transform:scaleX(-1);
+    transform:scaleX(-1);
 
 }

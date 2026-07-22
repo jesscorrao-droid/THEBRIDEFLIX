@@ -270,6 +270,66 @@ transition:opacity .25s;
     }
 
 }
+
+/* ==========================
+   PULSANTE CARICA FOTO
+========================== */
+
+.upload-bar{
+
+    margin:25px 0 35px;
+
+}
+
+.uploadButton{
+
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+
+    padding:16px 32px;
+
+    border-radius:50px;
+
+    text-decoration:none;
+
+    background:linear-gradient(135deg,#ff2d75,#ff5da2);
+
+    color:#fff;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    box-shadow:0 10px 30px rgba(255,45,117,.35);
+
+    transition:.25s;
+
+}
+
+.uploadButton:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 18px 40px rgba(255,45,117,.45);
+
+}
+
+.uploadButton:active{
+
+    transform:scale(.97);
+
+}
+
+.uploadButton::before{
+
+    content:"📸";
+
+    font-size:22px;
+
+}
+
+
 </style>
 
 </head>
@@ -277,6 +337,15 @@ transition:opacity .25s;
 <body>
 
 <h1>❤️ Ricordi del nostro giorno</h1>
+
+<div class="upload-bar">
+
+    <a href="upload.html" class="uploadButton">
+        <span class="icon">📸</span>
+        <span>Carica le tue foto</span>
+    </a>
+
+</div>
 
 <div class="subtitle">
 Le fotografie e le dediche condivise dai nostri ospiti.

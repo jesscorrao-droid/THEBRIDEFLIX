@@ -26,50 +26,51 @@
 
 <div class="card">
 
+    <a href="ricordi.html" class="galleryButton">
+        📸 Guarda i Ricordi
+    </a>
+
     <h1>Emanuela ❤️ Lucia</h1>
 
     <h2>Share Your Memories</h2>
 
     <p class="subtitle">
-
         Ogni fotografia racconta un'emozione.<br>
-
         Condividete con noi il vostro ricordo di questa giornata speciale.
-
     </p>
 
-    <label for="foto" class="upload-box">
+   <label class="upload-box" for="foto">
 
-        <div id="previewContainer">
+    <div id="previewContainer">
 
-            <img id="preview">
+        <img id="preview" style="display:none;">
 
-            <div id="placeholder">
+        <div id="placeholder">
 
-                <div class="camera">
+            <div class="camera">📸</div>
 
-                    📸
+            <strong>Scegli una o più foto</strong>
 
-                </div>
-
-                <strong>Scegli una foto</strong>
-
-                <span>Tocca qui per selezionarla</span>
-
-            </div>
+            <span>Tocca qui per selezionarle</span>
 
         </div>
 
-    </label>
+    </div>
 
-    <input
-        type="file"
-        id="foto"
-        accept="image/*">
+</label>
+
+<div id="selectedCount"></div>
+
+<input
+    type="file"
+    id="foto"
+    accept="image/*"
+    multiple
+    style="display:none;">
 
     <div class="field">
 
-        <label>Il tuo nome</label>
+        <label for="nome">Il tuo nome</label>
 
         <input
             type="text"
@@ -81,7 +82,7 @@
 
     <div class="field">
 
-        <label>La tua dedica</label>
+        <label for="messaggio">La tua dedica</label>
 
         <textarea
             id="messaggio"
@@ -89,59 +90,53 @@
             placeholder="Scrivi una dedica alle spose..."></textarea>
 
         <div id="counter">
-
             0 / 300
-
         </div>
 
     </div>
 
     <button id="invia">
-
         ❤️ Invia la dedica
-
     </button>
 
 </div>
 
 <script>
 
-const foto=document.getElementById("foto");
-const preview=document.getElementById("preview");
-const placeholder=document.getElementById("placeholder");
+const foto = document.getElementById("foto");
+const preview = document.getElementById("preview");
+const placeholder = document.getElementById("placeholder");
 
-foto.addEventListener("change",()=>{
+foto.addEventListener("change", () => {
 
-const file=foto.files[0];
+    const files = foto.files;
 
-if(!file)return;
+    if (files.length === 0) return;
 
-preview.src=URL.createObjectURL(file);
+  preview.src = URL.createObjectURL(files[0]);
+preview.style.display = "block";
 
-preview.style.display="block";
+placeholder.style.display = "none";
 
-placeholder.style.display="none";
+document.getElementById("selectedCount").textContent =
+    `${files.length} foto selezionate`;
 
 });
 
-const txt=document.getElementById("messaggio");
+const txt = document.getElementById("messaggio");
+const counter = document.getElementById("counter");
 
-const counter=document.getElementById("counter");
+txt.addEventListener("input", () => {
 
-txt.addEventListener("input",()=>{
-
-counter.innerHTML=txt.value.length+" / 300";
+    counter.textContent = txt.value.length + " / 300";
 
 });
 
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="config.js"></script>
-
 <script src="upload.js"></script>
 
 </body>
-
 </html>
