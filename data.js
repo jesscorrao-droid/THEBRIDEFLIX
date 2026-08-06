@@ -65,11 +65,12 @@ const videos = [
    MATRIMONIO
 ================================ */
 
-{
+
+ {
     category:"wedding",
     title:"DRONATA ANELLI DI ANTONIO SCANNAVINO",
-    image:"images/bride coming soon.png",
-    youtube:""
+    image:"images/DRONATA.png",
+    youtube:"https://www.youtube.com/embed/bZLVzeKrvjk?autoplay=1&rel=0&modestbranding=1&playsinline=1"
 },
 
 {
@@ -101,6 +102,13 @@ const videos = [
     title:"LO SCHERZO",
     image:"images/LO SCHERZO.png",
     youtube:"https://www.youtube.com/embed/SQUrpwv3Mxg?autoplay=1&rel=0&modestbranding=1&playsinline=1"
-}
+},
+
+{
+    category:"special",
+    title:"VIDEO COUNTDOWN",
+    image:"images/videocountdown.png",
+    youtube:"https://www.youtube.com/embed/bM_OmcjfbAQ?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+},
 
 ];
