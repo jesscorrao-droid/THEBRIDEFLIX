@@ -3,71 +3,104 @@
    SCRIPT.JS
 =====================================================*/
 
-// ----------------------------
-// ELEMENTI
-// ----------------------------
+// =====================================================
+// ELEMENTI VIDEO
+// =====================================================
 
 const modal = document.getElementById("videoModal");
+
 const iframe = document.getElementById("trailerVideo");
+
 const closeButton = document.querySelector(".close");
+
 const homeButton = document.getElementById("goHome");
+
 let lastScrollPosition = 0;
 
+
+// =====================================================
 // SUPABASE
+// =====================================================
+
 const sb = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
 
 
-// ----------------------------
+// =====================================================
 // APRE VIDEO
-// ----------------------------
+// =====================================================
 
 function openVideo(url){
 
     if(!url) return;
 
-    // Salva la posizione della pagina
+    // Salva la posizione della Home
     lastScrollPosition = window.scrollY;
 
+    // Carica direttamente il link YouTube
     iframe.src = url;
 
+    // Mostra il popup
     modal.style.display = "block";
 
+    // Blocca lo scroll della Home
     document.body.style.overflow = "hidden";
 
 }
 
-// ----------------------------
+
+// =====================================================
 // CHIUDE VIDEO
-// ----------------------------
+// =====================================================
 
 function closeVideo(){
 
-    modal.style.display="none";
+    modal.style.display = "none";
 
-    iframe.src="";
+    // Svuota l'iframe per fermare il video
+    iframe.src = "";
 
-    document.body.style.overflow="auto";
+    // Riattiva lo scroll
+    document.body.style.overflow = "auto";
 
 }
 
-closeButton.addEventListener("click",closeVideo);
+
+// =====================================================
+// PULSANTE X
+// =====================================================
+
+if(closeButton){
+
+    closeButton.addEventListener("click",closeVideo);
+
+}
+
+
+// =====================================================
+// CLIC SULLO SFONDO DEL POPUP
+// =====================================================
 
 window.addEventListener("click",(e)=>{
 
-    if(e.target===modal){
+    if(e.target === modal){
 
         closeVideo();
 
     }
 
 });
+
+
+// =====================================================
+// ESC
+// =====================================================
 
 document.addEventListener("keydown",(e)=>{
 
-    if(e.key==="Escape"){
+    if(e.key === "Escape"){
 
         closeVideo();
 
@@ -75,125 +108,103 @@ document.addEventListener("keydown",(e)=>{
 
 });
 
-// ===========================
-// DEDICHE
-// ===========================
 
-const dedicaModal=document.getElementById("dedicaModal");
-
-const dedicaFoto=document.getElementById("dedicaFoto");
-
-const dedicaNome=document.getElementById("dedicaNome");
-
-const dedicaMessaggio=document.getElementById("dedicaMessaggio");
-
-const closeDedica=document.getElementById("closeDedica");
-
-function openDedica(d){
-
-    dedicaFoto.src=d.foto;
-
-    dedicaNome.innerText=d.nome;
-
-    dedicaMessaggio.innerText=d.messaggio;
-
-    dedicaModal.style.display="block";
-
-    document.body.style.overflow="hidden";
-
-}
-
-function closeDedicaModal(){
-
-    dedicaModal.style.display="none";
-
-    document.body.style.overflow="auto";
-
-}
-
-closeDedica.addEventListener("click",closeDedicaModal);
-
-window.addEventListener("click",(e)=>{
-
-    if(e.target===dedicaModal){
-
-        closeDedicaModal();
-
-    }
-
-});
-
-// ----------------------------
-// TORNA ALLA HOME
-// ----------------------------
-
-homeButton.addEventListener("click",()=>{
-
-    closeVideo();
-
-    window.scrollTo({
-
-        top:lastScrollPosition,
-
-        behavior:"smooth"
-
-    });
-
-});
-
-// ----------------------------
+// =====================================================
 // HEADER SCROLL
-// ----------------------------
+// =====================================================
 
-const header=document.querySelector("header");
+const header = document.querySelector("header");
 
 window.addEventListener("scroll",()=>{
 
-    if(window.scrollY>60){
+    if(!header) return;
 
-        header.style.background="#000";
+    if(window.scrollY > 60){
 
-    }
+        header.style.background = "#000";
 
-    else{
+    }else{
 
-        header.style.background="linear-gradient(to bottom,#000,transparent)";
+        header.style.background =
+            "linear-gradient(to bottom,#000,transparent)";
 
     }
 
 });
 
-// ----------------------------
-// CREAZIONE AUTOMATICA CARD
-// ----------------------------
 
-createCategory("party", "partyRow");
+// =====================================================
+// TORNA ALLA HOME DAL PLAYER
+// =====================================================
+
+if(homeButton){
+
+    homeButton.addEventListener("click",()=>{
+
+        closeVideo();
+
+        window.scrollTo({
+
+            top:lastScrollPosition,
+
+            behavior:"smooth"
+
+        });
+
+    });
+
+}
+
+
+// =====================================================
+// CREAZIONE AUTOMATICA CARD
+// =====================================================
+
+createCategory("party","partyRow");
+
 createCategory("wedding","weddingCards");
+
 createCategory("special","specialCards");
+
+
+// =====================================================
+// CREA CATEGORIA
+// =====================================================
 
 function createCategory(category,containerID){
 
-    const container=document.getElementById(containerID);
+    const container =
+        document.getElementById(containerID);
 
     if(!container) return;
 
-    const list=videos.filter(v=>v.category===category);
+    const list =
+        videos.filter(video => video.category === category);
 
     list.forEach(video=>{
 
-        const card=document.createElement("div");
+        const card =
+            document.createElement("div");
 
-        card.className="card";
+        card.className = "card";
 
-        card.innerHTML=`
+        card.innerHTML = `
 
-            <img src="${video.image}" alt="${video.title}">
+            <img
+                src="${video.image}"
+                alt="${video.title}"
+            >
 
             <h3>${video.title}</h3>
 
         `;
 
-        if(video.youtube!=""){
+
+        // =================================================
+        // VIDEO DISPONIBILE
+        // =================================================
+
+        if(video.youtube){
 
             card.addEventListener("click",()=>{
 
@@ -203,21 +214,226 @@ function createCategory(category,containerID){
 
         }
 
+
+        // =================================================
+        // VIDEO NON ANCORA DISPONIBILE
+        // =================================================
+
+        else{
+
+            card.classList.add("disabled");
+
+        }
+
+
         container.appendChild(card);
 
     });
 
 }
 
-/* ======================================
-   PWA
-====================================== */
+// =====================================================
+// DEDICHE
+// =====================================================
+
+const dedicaModal =
+    document.getElementById("dedicaModal");
+
+const dedicaFoto =
+    document.getElementById("dedicaFoto");
+
+const dedicaNome =
+    document.getElementById("dedicaNome");
+
+const dedicaMessaggio =
+    document.getElementById("dedicaMessaggio");
+
+const closeDedica =
+    document.getElementById("closeDedica");
+
+
+// =====================================================
+// APRE DEDICA
+// =====================================================
+
+function openDedica(d){
+
+    if(!dedicaModal) return;
+
+    if(dedicaFoto){
+
+        dedicaFoto.src = d.foto;
+
+    }
+
+    if(dedicaNome){
+
+        dedicaNome.textContent = d.nome;
+
+    }
+
+    if(dedicaMessaggio){
+
+        dedicaMessaggio.textContent =
+            d.messaggio;
+
+    }
+
+    dedicaModal.style.display = "block";
+
+    document.body.style.overflow = "hidden";
+
+}
+
+
+// =====================================================
+// CHIUDE DEDICA
+// =====================================================
+
+function closeDedicaModal(){
+
+    if(!dedicaModal) return;
+
+    dedicaModal.style.display = "none";
+
+    document.body.style.overflow = "auto";
+
+}
+
+
+// =====================================================
+// PULSANTE CHIUDI
+// =====================================================
+
+if(closeDedica){
+
+    closeDedica.addEventListener(
+        "click",
+        closeDedicaModal
+    );
+
+}
+
+
+// =====================================================
+// CLICK SULLO SFONDO
+// =====================================================
+
+window.addEventListener("click",(e)=>{
+
+    if(
+        dedicaModal &&
+        e.target === dedicaModal
+    ){
+
+        closeDedicaModal();
+
+    }
+
+});
+
+
+// =====================================================
+// ESC DEDICA
+// =====================================================
+
+document.addEventListener("keydown",(e)=>{
+
+    if(
+        e.key === "Escape" &&
+        dedicaModal &&
+        dedicaModal.style.display === "block"
+    ){
+
+        closeDedicaModal();
+
+    }
+
+});
+
+
+// =====================================================
+// CARICA DEDICHE
+// =====================================================
+
+async function caricaDediche(){
+
+    const { data, error } = await sb
+
+        .from("dediche")
+
+        .select("*")
+
+        .order("id", {
+            ascending:false
+        });
+
+
+    if(error){
+
+        console.log(
+            "Errore caricamento dediche:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    const row =
+        document.getElementById("dediche-row");
+
+    if(!row) return;
+
+
+    row.innerHTML = "";
+
+
+    data.forEach(d=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "card dedica-card";
+
+
+        card.innerHTML = `
+
+            <img
+                src="${d.foto}"
+                alt="${d.nome}"
+            >
+
+            <h3>${d.nome}</h3>
+
+        `;
+
+
+        card.addEventListener("click",()=>{
+
+            openDedica(d);
+
+        });
+
+
+        row.appendChild(card);
+
+    });
+
+}
+
+// =====================================================
+// PWA
+// =====================================================
 
 if ("serviceWorker" in navigator) {
 
     window.addEventListener("load", () => {
 
-        navigator.serviceWorker.register("./service-worker.js")
+        navigator.serviceWorker
+            .register("./service-worker.js")
 
             .then(() => {
 
@@ -225,9 +441,12 @@ if ("serviceWorker" in navigator) {
 
             })
 
-            .catch(err => {
+            .catch(error => {
 
-                console.log(err);
+                console.log(
+                    "Errore Service Worker:",
+                    error
+                );
 
             });
 
@@ -235,206 +454,23 @@ if ("serviceWorker" in navigator) {
 
 }
 
-/* =====================================================
-   BRIDEFLIX TV MODE - STEP 1
-===================================================== */
 
-let currentCard = null;
-let cards = [];
-
-function updateFocus(card = null) {
-
-    cards = [...document.querySelectorAll(".card")];
-
-    if (!cards.length) return;
-
-    cards.forEach(c => c.classList.remove("tv-focus"));
-
-    if (!currentCard) {
-
-        currentCard = cards[0];
-
-    }
-
-    if (card) {
-
-        currentCard = card;
-
-    }
-
-    currentCard.classList.add("tv-focus");
-
-    currentCard.scrollIntoView({
-
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center"
-
-    });
-
-}
-
-window.addEventListener("load", () => {
-
-    setTimeout(() => {
-
-        cards = [...document.querySelectorAll(".card")];
-
-        if (cards.length) {
-
-            updateFocus(cards[0]);
-
-        }
-
-    }, 500);
-
-});
-
-function findClosestCard(direction) {
-
-    const currentRect = currentCard.getBoundingClientRect();
-
-    let candidate = null;
-    let bestDistance = Infinity;
-
-    cards.forEach(card => {
-
-        if (card === currentCard) return;
-
-        const rect = card.getBoundingClientRect();
-
-        let valid = false;
-
-        switch(direction){
-
-            case "up":
-                valid = rect.top < currentRect.top - 20;
-                break;
-
-            case "down":
-                valid = rect.top > currentRect.top + 20;
-                break;
-
-        }
-
-        if(!valid) return;
-
-        const distance = Math.abs(rect.top-currentRect.top)
-                       + Math.abs(rect.left-currentRect.left);
-
-        if(distance < bestDistance){
-
-            bestDistance = distance;
-            candidate = card;
-
-        }
-
-    });
-
-    return candidate;
-
-}
-
-document.addEventListener("keydown", e => {
-
-    cards = [...document.querySelectorAll(".card")];
-
-    if (!cards.length || !currentCard) return;
-
-    let currentIndex = cards.indexOf(currentCard);
-
-    switch (e.key) {
-
-        case "ArrowRight":
-
-            e.preventDefault();
-
-            if (currentIndex < cards.length - 1) {
-
-                updateFocus(cards[currentIndex + 1]);
-
-            }
-
-            break;
-
-        case "ArrowLeft":
-
-            e.preventDefault();
-
-            if (currentIndex > 0) {
-
-                updateFocus(cards[currentIndex - 1]);
-
-            }
-
-            break;
-
-        case "Enter":
-
-            e.preventDefault();
-
-            currentCard.click();
-
-            break;
-
-        case "Escape":
-
-            e.preventDefault();
-
-            closeVideo();
-
-            break;
-
-    }
-
-});
-
-async function caricaDediche(){
-
-    const { data, error } = await sb
-        .from("dediche")
-        .select("*")
-        .order("id", { ascending:false });
-
-    if(error){
-
-        console.log(error);
-
-        return;
-
-    }
-
-    const row = document.getElementById("dediche-row");
-
-    row.innerHTML="";
-
-   data.forEach(d => {
-
-    const card = document.createElement("div");
-
-    card.className = "card dedica-card";
-
-    card.innerHTML = `
-        <img src="${d.foto}" alt="${d.nome}">
-        <h3>${d.nome}</h3>
-    `;
-
-    card.addEventListener("click", () => {
-        openDedica(d);
-    });
-
-    row.appendChild(card);
-
-});
-
-}
+// =====================================================
+// WEDDING MEMORIES
+// =====================================================
 
 async function caricaWeddingDedications() {
 
     const { data, error } = await sb
+
         .from("dediche")
+
         .select("*")
-        .order("id", { ascending: false });
+
+        .order("id", {
+            ascending: false
+        });
+
 
     if (error) {
 
@@ -444,13 +480,17 @@ async function caricaWeddingDedications() {
 
     }
 
-    const box = document.getElementById("dedicheHome");
+
+    const box =
+        document.getElementById("dedicheHome");
 
     if (!box) return;
+
 
     const totale = data.length;
 
     const immagini = data.slice(0, 4);
+
 
     box.innerHTML = `
 
@@ -458,20 +498,33 @@ async function caricaWeddingDedications() {
 
             <div class="dediche-collage">
 
-                ${immagini.map(d=>`
-                    <img src="${d.foto}">
+                ${immagini.map(d => `
+
+                    <img
+                        src="${d.foto}"
+                        alt="${d.nome}"
+                    >
+
                 `).join("")}
 
             </div>
 
+
             <div class="dediche-info">
 
-                <h3>❤️ ${totale} Wedding Memories</h3>
+                <h3>
+                    ❤️ ${totale} Wedding Memories
+                </h3>
+
 
                 <p>
-                    Guarda tutte le fotografie e le dediche
-                    lasciate dagli invitati.
+
+                    Guarda tutte le fotografie
+                    e le dediche lasciate
+                    dagli invitati.
+
                 </p>
+
 
                 <button class="playDediche">
 
@@ -485,44 +538,310 @@ async function caricaWeddingDedications() {
 
     `;
 
-    box.querySelector(".playDediche").addEventListener("click",()=>{
 
-        window.location="dediche.html";
+    const playButton =
+        box.querySelector(".playDediche");
+
+
+    if (playButton) {
+
+        playButton.addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    "ricordi.html";
+
+            }
+        );
+
+    }
+
+}
+
+
+// =====================================================
+// CONTATORE WEDDING MEMORIES
+// =====================================================
+
+async function aggiornaContatoreDediche() {
+
+    const { count, error } = await sb
+
+        .from("dediche")
+
+        .select("*", {
+
+            count: "exact",
+
+            head: true
+
+        });
+
+
+    if (error) {
+
+        console.log(error);
+
+        return;
+
+    }
+
+
+    const counter =
+        document.getElementById(
+            "dedicationCounter"
+        );
+
+
+    if (counter) {
+
+        counter.innerHTML =
+            `❤️ ${count} Wedding Memories`;
+
+    }
+
+}
+
+
+// =====================================================
+// CARD WEDDING MEMORIES
+// =====================================================
+
+const dedicationCard =
+    document.getElementById(
+        "dedicationCard"
+    );
+
+
+if (dedicationCard) {
+
+    dedicationCard.addEventListener(
+        "click",
+        () => {
+
+            window.location.href =
+                "ricordi.html";
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   BRIDEFLIX TV MODE
+===================================================== */
+
+let currentCard = null;
+let cards = [];
+
+
+/* =====================================================
+   AGGIORNA LE CARD
+===================================================== */
+
+function refreshCards(){
+
+    cards = [
+        ...document.querySelectorAll(".card")
+    ];
+
+}
+
+
+/* =====================================================
+   AGGIORNA IL FOCUS
+===================================================== */
+
+function updateFocus(card = null){
+
+    refreshCards();
+
+    if(!cards.length) return;
+
+
+    cards.forEach(c => {
+
+        c.classList.remove("tv-focus");
+
+    });
+
+
+    if(card){
+
+        currentCard = card;
+
+    }
+
+
+    if(!currentCard){
+
+        currentCard = cards[0];
+
+    }
+
+
+    currentCard.classList.add("tv-focus");
+
+
+    currentCard.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"nearest",
+
+        inline:"center"
 
     });
 
 }
 
-async function aggiornaContatoreDediche(){
 
-    const { count, error } = await sb
-        .from("dediche")
-        .select("*",{
-            count:"exact",
-            head:true
-        });
+/* =====================================================
+   FOCUS INIZIALE
+===================================================== */
 
-    if(error){
+window.addEventListener("load",()=>{
 
-        console.log(error);
+    setTimeout(()=>{
+
+        refreshCards();
+
+        if(cards.length){
+
+            updateFocus(cards[0]);
+
+        }
+
+    },500);
+
+});
+
+
+/* =====================================================
+   NAVIGAZIONE TELECOMANDO
+===================================================== */
+
+document.addEventListener("keydown",(e)=>{
+
+    refreshCards();
+
+    if(!cards.length || !currentCard){
+
         return;
 
     }
 
-    const counter = document.getElementById("dedicationCounter");
 
-    if(counter){
+    const currentIndex =
+        cards.indexOf(currentCard);
 
-        counter.innerHTML = `❤️ ${count} Wedding Memories`;
+
+    switch(e.key){
+
+
+        /* -----------------------------
+           DESTRA
+        ----------------------------- */
+
+        case "ArrowRight":
+
+            e.preventDefault();
+
+            if(currentIndex < cards.length - 1){
+
+                updateFocus(
+                    cards[currentIndex + 1]
+                );
+
+            }
+
+            break;
+
+
+        /* -----------------------------
+           SINISTRA
+        ----------------------------- */
+
+        case "ArrowLeft":
+
+            e.preventDefault();
+
+            if(currentIndex > 0){
+
+                updateFocus(
+                    cards[currentIndex - 1]
+                );
+
+            }
+
+            break;
+
+
+        /* -----------------------------
+           GIÙ
+        ----------------------------- */
+
+        case "ArrowDown":
+
+            e.preventDefault();
+
+            if(currentIndex + 4 < cards.length){
+
+                updateFocus(
+                    cards[currentIndex + 4]
+                );
+
+            }
+
+            break;
+
+
+        /* -----------------------------
+           SU
+        ----------------------------- */
+
+        case "ArrowUp":
+
+            e.preventDefault();
+
+            if(currentIndex - 4 >= 0){
+
+                updateFocus(
+                    cards[currentIndex - 4]
+                );
+
+            }
+
+            break;
+
+
+        /* -----------------------------
+           ENTER
+        ----------------------------- */
+
+        case "Enter":
+
+            e.preventDefault();
+
+            currentCard.click();
+
+            break;
+
+
+        /* -----------------------------
+           ESC
+        ----------------------------- */
+
+        case "Escape":
+
+            e.preventDefault();
+
+            closeVideo();
+
+            break;
 
     }
 
-}
-
-aggiornaContatoreDediche();
-
-document.getElementById("dedicationCard").onclick = () => {
-
-    window.location = "ricordi.html";
-
-};
+});
