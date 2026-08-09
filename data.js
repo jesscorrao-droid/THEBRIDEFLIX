@@ -66,28 +66,39 @@ const videos = [
 
 {
     category:"wedding",
+    title:"L'ATTESA",
+    image:"images/attesa.jpg",
+    youtube:"https://www.youtube.com/embed/t1nqtCi3D08?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+},
+
+
+{
+    category:"wedding",
     title:"DRONATA ANELLI DI ANTONIO SCANNAVINO",
     image:"images/DRONATA.png",
     youtube:"https://www.youtube.com/embed/hAU2E2EAVkQ?autoplay=1&rel=0&modestbranding=1&playsinline=1"
 },
 
-{
-    category:"wedding",
-    title:"VIDEO 2",
-    image:"images/bride coming soon.png",
-    youtube:""
-},
 
-{
-    category:"wedding",
-    title:"VIDEO 3",
-    image:"images/bride coming soon.png",
-    youtube:""
-},
 
 /* ===============================
    CONTENUTI SPECIALI
 ================================ */
+
+{
+    category:"special",
+    title:"RITO AL COMUNE",
+    image:"images/comune.jpg",
+    youtube:"https://www.youtube.com/embed/pkznIEm-KBs?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+},
+
+{
+    category:"special",
+    title:"VIDEO COUNTDOWN",
+    image:"images/videocountdown.png",
+    youtube:"https://www.youtube.com/embed/bM_OmcjfbAQ?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+},
+
 
 {
     category:"special",
@@ -103,11 +114,5 @@ const videos = [
     youtube:"https://www.youtube.com/embed/SQUrpwv3Mxg?autoplay=1&rel=0&modestbranding=1&playsinline=1"
 },
 
-{
-    category:"special",
-    title:"VIDEO COUNTDOWN",
-    image:"images/videocountdown.png",
-    youtube:"https://www.youtube.com/embed/bM_OmcjfbAQ?autoplay=1&rel=0&modestbranding=1&playsinline=1"
-}
 
 ];
