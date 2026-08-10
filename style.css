@@ -424,6 +424,10 @@ GRIGLIA VIDEO
 
 }
 
+/* ==========================================
+   TITOLI CARD SEMPRE VISIBILI
+========================================== */
+
 .card h3{
 
     position:absolute;
@@ -440,21 +444,18 @@ GRIGLIA VIDEO
 
     font-weight:700;
 
-    opacity:0;
+    opacity:1;
 
-    transform:translateY(20px);
+    transform:translateY(0);
 
     transition:.35s;
 
     z-index:10;
 
-}
+    margin:0;
 
-.card:hover h3{
-
-    opacity:1;
-
-    transform:translateY(0);
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.8);
 
 }
 

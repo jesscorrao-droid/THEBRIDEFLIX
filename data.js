@@ -89,16 +89,8 @@ const videos = [
     category:"special",
     title:"RITO AL COMUNE",
     image:"images/comune.jpg",
-    youtube:"https://www.youtube.com/embed/pkznIEm-KBs?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+    youtube:"https://www.youtube.com/embed/k5KOfwoTLdQ?autoplay=1&rel=0&modestbranding=1&playsinline=1"
 },
-
-{
-    category:"special",
-    title:"VIDEO COUNTDOWN",
-    image:"images/videocountdown.png",
-    youtube:"https://www.youtube.com/embed/bM_OmcjfbAQ?autoplay=1&rel=0&modestbranding=1&playsinline=1"
-},
-
 
 {
     category:"special",
