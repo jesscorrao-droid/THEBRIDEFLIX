@@ -68,7 +68,7 @@ const videos = [
     category:"wedding",
     title:"L'ATTESA",
     image:"images/attesa.jpg",
-    youtube:"https://www.youtube.com/embed/t1nqtCi3D08?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+    youtube:"https://www.youtube.com/embed/EYCY09zz2tw?autoplay=1&rel=0&modestbranding=1&playsinline=1"
 },
 
 
