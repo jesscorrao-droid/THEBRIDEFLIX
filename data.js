@@ -79,6 +79,14 @@ const videos = [
         youtube: "https://www.youtube.com/embed/5sxjB8m5L90"
     },
 
+     {
+        category: "wedding",
+        title: "IL DECOLLO",
+        image: "images/decollo.jpg",
+        youtube: "https://www.youtube.com/embed/V4Lif4sj-DY"
+    },
+
+
     {
         category: "wedding",
         title: "DRONATA ANELLI DI ANTONIO SCANNAVINO",
