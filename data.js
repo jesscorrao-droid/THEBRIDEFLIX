@@ -86,6 +86,13 @@ const videos = [
         youtube: "https://www.youtube.com/embed/V4Lif4sj-DY"
     },
 
+     {
+        category: "wedding",
+        title: "GIALLO, ARANCIONE, VERDE, ROSSO",
+        image: "images/ritosabbia1.png",
+        youtube: "https://www.youtube.com/embed/kLe3hOlh3Lo"
+    },
+
 
     {
         category: "wedding",
