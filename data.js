@@ -93,6 +93,12 @@ const videos = [
         youtube: "https://www.youtube.com/embed/kLe3hOlh3Lo"
     },
 
+     {
+        category: "wedding",
+        title: "LE PROMESSE",
+        image: "images/PROMESSE.jpg",
+        youtube: "https://www.youtube.com/embed/iSMYJQUrcsg"
+    },
 
     {
         category: "wedding",
