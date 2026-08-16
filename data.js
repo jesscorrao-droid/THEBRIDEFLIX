@@ -100,6 +100,13 @@ const videos = [
         youtube: "https://www.youtube.com/embed/iSMYJQUrcsg"
     },
 
+     {
+        category: "wedding",
+        title: "IL RITO E L'ARRIVO DEL DRONE",
+        image: "images/FOTODRONATA.jpg",
+        youtube: "https://www.youtube.com/embed/05WeXvOnW-A"
+    },
+
     {
         category: "wedding",
         title: "DRONATA ANELLI DI ANTONIO SCANNAVINO",
