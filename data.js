@@ -114,6 +114,13 @@ const videos = [
         youtube: "https://www.youtube.com/embed/hAU2E2EAVkQ"
     },
 
+    {
+        category: "wedding",
+        title: "COCCIU D'AMURI",
+        image: "images/cocciu.jpg",
+        youtube: "https://www.youtube.com/embed/Wnz0fA_sBYU"
+    },
+
 
     /* ===============================
        CONTENUTI SPECIALI
