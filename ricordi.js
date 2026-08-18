@@ -340,28 +340,116 @@ viewer.addEventListener("click", e => {
 
 
 // =====================================
+// =====================================
 // TASTIERA
 // =====================================
 
 document.addEventListener("keydown", e => {
 
-    if (viewer.style.display !== "flex") return;
+    // =================================
+    // BACKSPACE
+    // =================================
+
+    if (e.key === "Backspace") {
+
+        /*
+         * Se stiamo scrivendo dentro
+         * un campo di testo NON intercettiamo
+         * il Backspace.
+         */
+
+        const activeElement = document.activeElement;
+
+        if (
+            activeElement &&
+            (
+                activeElement.tagName === "INPUT" ||
+                activeElement.tagName === "TEXTAREA" ||
+                activeElement.isContentEditable
+            )
+        ) {
+            return;
+        }
+
+
+        e.preventDefault();
+
+
+        // ---------------------------------
+        // SE IL VIEWER È APERTO
+        // ---------------------------------
+
+        if (viewer.style.display === "flex") {
+
+            closeViewer();
+
+            return;
+
+        }
+
+
+        // ---------------------------------
+        // SE SIAMO NELLA PAGINA RICORDI
+        // ---------------------------------
+
+        if (window.history.length > 1) {
+
+            window.history.back();
+
+        } else {
+
+            /*
+             * Nel caso la pagina Ricordi
+             * sia stata aperta direttamente,
+             * torniamo comunque alla Home.
+             */
+
+            window.location.href = "index.html";
+
+        }
+
+        return;
+
+    }
+
+
+    // =================================
+    // SE IL VIEWER NON È APERTO
+    // non gestiamo le frecce
+    // =================================
+
+    if (viewer.style.display !== "flex") {
+        return;
+    }
+
+
+    // =================================
+    // FRECCE
+    // =================================
 
     switch (e.key) {
 
         case "ArrowRight":
 
+            e.preventDefault();
+
             nextPhoto();
 
             break;
 
+
         case "ArrowLeft":
+
+            e.preventDefault();
 
             previousPhoto();
 
             break;
 
+
         case "Escape":
+
+            e.preventDefault();
 
             closeViewer();
 

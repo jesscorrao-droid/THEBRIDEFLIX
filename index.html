@@ -2,26 +2,63 @@
 <html lang="it">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>BRIDEFLIX</title>
 
-    <link rel="stylesheet" href="style.css">
 
-    <link rel="manifest" href="manifest.json">
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
 
-<meta name="theme-color" content="#ff2d95">
+    <link rel="stylesheet"
+          href="style.css">
 
-<meta name="apple-mobile-web-app-capable" content="yes">
 
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- =====================================================
+         PWA
+    ====================================================== -->
 
-<meta name="apple-mobile-web-app-title" content="BRIDEFLIX">
+    <link rel="manifest"
+          href="manifest.json">
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <meta name="theme-color"
+          content="#ff2d95">
+
+    <meta name="mobile-web-app-capable"
+          content="yes">
+
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black">
+
+    <meta name="apple-mobile-web-app-title"
+          content="BRIDEFLIX">
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap"
+        rel="stylesheet">
+
 </head>
 
+
 <body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
 
@@ -29,29 +66,60 @@
         BRIDEFLIX
     </div>
 
+
     <nav>
-        <a href="#">Home</a>
-        <a href="#matrimonio">Il Matrimonio</a>
-        <a href="#dediche">Wedding Photos</a>
-        <a href="#party">Bride Independence Party</a>
-        <a href="#speciali">Contenuti Speciali</a>
+
+        <a href="#">
+            Home
+        </a>
+
+        <a href="#matrimonio">
+            Il Matrimonio
+        </a>
+
+        <a href="#dediche">
+            Wedding Photos
+        </a>
+
+        <a href="#party">
+            Bride Independence Party
+        </a>
+
+        <a href="#speciali">
+            Contenuti Speciali
+        </a>
+
     </nav>
 
 </header>
 
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
 <section class="hero">
 
-    <!-- Banner Desktop -->
-    <img src="images/banner.jpg"
-         class="hero-image hero-desktop"
-         alt="Emanuela e Lucia">
 
-    <!-- Banner Mobile -->
-    <img src="images/provabanner.png"
-         class="hero-image hero-mobile"
-         alt="Emanuela e Lucia">
+    <!-- BANNER DESKTOP -->
+
+    <img
+        src="images/banner.jpg"
+        class="hero-image hero-desktop"
+        alt="Emanuela e Lucia">
+
+
+    <!-- BANNER MOBILE -->
+
+    <img
+        src="images/provabanner.png"
+        class="hero-image hero-mobile"
+        alt="Emanuela e Lucia">
+
 
     <div class="overlay"></div>
+
 
     <div class="hero-content">
 
@@ -59,79 +127,248 @@
             LUGLIO 2026
         </span>
 
-        <h1>Emanuela ❤️ Lucia</h1>
+
+        <h1>
+            Emanuela ❤️ Lucia
+        </h1>
+
 
         <p>
-            Benvenuti nella piattaforma ufficiale del nostro matrimonio.
-            Qui troverete tutti i momenti più belli da ricordare.
+            Benvenuti nella piattaforma ufficiale
+            del nostro matrimonio.
+            Qui troverete tutti i momenti più belli
+            da ricordare.
         </p>
 
     </div>
 
 </section>
 
-<!-- ========================= -->
-<!-- MATRIMONIO -->
-<!-- ========================= -->
 
-<section class="section" id="matrimonio">
 
-<h2>💍 IL MATRIMONIO 💍</h2>
+<!-- =====================================================
+     IL MATRIMONIO
+===================================================== -->
 
-<div class="cards" id="weddingCards"></div>
+<section
+    class="section"
+    id="matrimonio">
+
+    <h2>
+        💍 IL MATRIMONIO 💍
+    </h2>
+
+
+    <!-- =================================================
+         LE DUE CARD
+    ================================================== -->
+
+    <div class="cards">
+
+
+        <!-- =================================================
+             WEDDING DEDICATIONS
+        ================================================== -->
+
+        <div
+            id="dedicationCard"
+            class="card dedication-card"
+        >
+
+            <img
+                src="images/weddingdedication.png"
+                alt="Wedding Dedications">
+
+            <div class="dedication-overlay">
+
+                <h3>
+                    💌 Wedding Dedications
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             LA CERIMONIA
+        ================================================== -->
+
+        <div
+            id="weddingSeriesCard"
+            class="card wedding-series-card"
+        >
+
+            <img
+                src="images/BACIO.png"
+                alt="La Cerimonia">
+
+            <div class="wedding-series-overlay">
+
+               
+
+                <h3>
+                    LA CERIMONIA
+                </h3>
+
+                <small>
+                    • 9 EPISODI
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </div>
 
 </section>
 
-<section class="section" id="dediche">
 
-    <h2>💌 WEDDING PHOTOS 💌</h2>
 
-  <div class="cards">
+<!-- =====================================================
+     BRIDE INDEPENDENCE PARTY
+===================================================== -->
 
-    <div id="dedicationCard" class="card dedication-card">
+<section
+    class="section"
+    id="party">
+
+
+    <h2>
+        🏳️‍🌈 BRIDE INDEPENDENCE DAY 🏳️‍🌈
+        & NAUTOSCOPIO
+    </h2>
+
+
+    <div
+        id="partyRow"
+        class="row">
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTENUTI SPECIALI
+===================================================== -->
+
+<section
+    class="section"
+    id="speciali">
+
+
+    <h2>
+        ⭐ CONTENUTI SPECIALI ⭐
+    </h2>
+
+
+    <div
+        class="cards"
+        id="specialCards">
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGINA SERIE
+     LA CERIMONIA
+===================================================== -->
+
+<div
+    id="weddingSeriesPage"
+    class="wedding-series-page"
+>
+
+
+    <!-- =================================================
+         TOP
+    ================================================== -->
+
+    <div class="wedding-series-top">
+
+        <button
+            id="closeWeddingSeries"
+            class="wedding-back-button"
+        >
+            ← BRIDEFLIX
+        </button>
+
+    </div>
+
+
+
+    <!-- =================================================
+         HERO PAGINA LA CERIMONIA
+===================================================== -->
+
+    <div class="wedding-series-hero">
+
+
+        <!-- =================================================
+             BANNER
+        ================================================== -->
 
         <img
-            src="images/DEDICATIONCOVER.png"
-            alt="Wedding Dedications">
+            src="images/BENNERCERIMONIA2.png"
+            class="wedding-series-banner"
+            alt="Emanuela e Lucia - La Cerimonia">
 
-        <div class="dedication-overlay">
 
-            <h3>💌 Wedding Dedications</h3>
+        <!-- =================================================
+             OSCURAMENTO STILE NETFLIX
+        ================================================== -->
 
-            <p id="dedicationCounter">
-                Caricamento...
-            </p>
+        <div class="wedding-series-banner-overlay"></div>
+
+
+        <!-- =================================================
+             TESTI
+        ================================================== -->
+
+        <div class="wedding-series-hero-content"> <div class="series-meta">
+</div>
+
 
         </div>
 
     </div>
 
+
+
+    <!-- =================================================
+         EPISODI
+    ================================================== -->
+
+    <div class="episodes-section">
+
+
+        <h2>
+            EPISODI
+        </h2>
+
+
+        <div
+            id="weddingEpisodes"
+            class="wedding-episodes">
+        </div>
+
+
+    </div>
+
+
 </div>
 
-</section>
 
-<!-- ========================= -->
-<!-- BRIDE INDEPENDENCE PARTY -->
-<!-- ========================= -->
 
-<section class="section" id="party">
-
-<h2>🏳️‍🌈BRIDE INDEPENDENCE DAY🏳️‍🌈 & NAUTOSCOPIO</h2>
-<div id="partyRow" class="row"></div>
-
-</section>
-
-<!-- ========================= -->
-<!-- CONTENUTI SPECIALI -->
-<!-- ========================= -->
-
-<section class="section" id="speciali">
-
-<h2>⭐ CONTENUTI SPECIALI ⭐</h2>
-
-<div class="cards" id="specialCards"></div>
-
-</section>
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
@@ -141,34 +378,46 @@
 
 </footer>
 
-<!-- POPUP VIDEO -->
 
 
-<div id="videoModal" class="modal">
+<!-- =====================================================
+     POPUP VIDEO
+===================================================== -->
+
+<div
+    id="videoModal"
+    class="modal"
+>
+
 
     <div class="modal-content">
 
+
         <div class="player-header">
 
-            <button id="goHome" class="homeButton">
 
+            <button
+                id="goHome"
+                class="homeButton"
+            >
                 TORNA ALLA HOME
-
             </button>
+
 
             <div class="playerLogo">
-
                 BRIDEFLIX
-
             </div>
 
-            <button class="close closeButton">
 
+            <button
+                class="close closeButton"
+            >
                 ✕
-
             </button>
 
+
         </div>
+
 
         <iframe
             id="trailerVideo"
@@ -180,72 +429,130 @@
             allowfullscreen>
         </iframe>
 
+
     </div>
 
 </div>
 
-<div id="videoEndScreen" class="end-screen">
+
+
+<!-- =====================================================
+     FINE VIDEO
+===================================================== -->
+
+<div
+    id="videoEndScreen"
+    class="end-screen"
+>
+
 
     <div class="end-content">
 
-        <h1>❤️ Grazie per aver condiviso questo momento con noi ❤️</h1>
+
+        <h1>
+            ❤️ Grazie per aver condiviso
+            questo momento con noi ❤️
+        </h1>
+
 
         <p>
-
-            Speriamo che questi ricordi vi accompagnino
-            ancora per tantissimo tempo.
-
+            Speriamo che questi ricordi
+            vi accompagnino ancora
+            per tantissimo tempo.
         </p>
+
 
         <div class="end-buttons">
 
+
             <button id="nextVideoBtn">
-
                 ▶ Guarda il prossimo video
-
             </button>
+
 
             <button id="homeBtn">
-
                 🏠 Torna alla Home
-
             </button>
 
+
         </div>
+
 
     </div>
 
 </div>
 
-<!-- ===================================== -->
-<!-- POPUP DEDICHE -->
-<!-- ===================================== -->
 
-<div id="dedicaModal" class="modal">
 
-    <div class="modal-content dedica-content">
+<!-- =====================================================
+     POPUP DEDICHE
+===================================================== -->
 
-        <button id="closeDedica" class="closeButton">✕</button>
+<div
+    id="dedicaModal"
+    class="modal"
+>
 
-        <img id="dedicaFoto" src="" alt="Dedica">
+
+    <div
+        class="modal-content dedica-content"
+    >
+
+
+        <button
+            id="closeDedica"
+            class="closeButton"
+        >
+            ✕
+        </button>
+
+
+        <img
+            id="dedicaFoto"
+            src=""
+            alt="Dedica">
+
 
         <div class="dedicaTesto">
 
+
             <h2 id="dedicaNome"></h2>
+
 
             <p id="dedicaMessaggio"></p>
 
+
         </div>
+
 
     </div>
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<!-- SUPABASE -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
+
+
+<!-- CONFIG -->
 
 <script src="config.js"></script>
 
+
+<!-- DATI VIDEO -->
+
 <script src="data.js"></script>
+
+
+<!-- SCRIPT PRINCIPALE -->
 
 <script src="script.js"></script>
 

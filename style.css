@@ -380,7 +380,7 @@ GRIGLIA VIDEO
 
 .card::before{
 
-    content:"▶";
+    content:"";
 
     position:absolute;
 
@@ -398,21 +398,51 @@ GRIGLIA VIDEO
 
     background:#ff2d95;
 
-    color:white;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:34px;
-
     opacity:0;
 
     transition:.35s;
 
     z-index:5;
+
+}
+
+/* Triangolo PLAY */
+
+.card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-42%,-50%) scale(.6);
+
+    width:0;
+
+    height:0;
+
+    border-top:13px solid transparent;
+
+    border-bottom:13px solid transparent;
+
+    border-left:20px solid white;
+
+    opacity:0;
+
+    transition:.35s;
+
+    z-index:6;
+
+}
+
+.card:hover::after{
+
+    opacity:1;
+
+    transform:translate(-42%,-50%) scale(1);
 
 }
 
@@ -1668,4 +1698,1336 @@ color:#ddd;
 
 }
 
+/* =====================================================
+   LA CERIMONIA Ã¢â‚¬â€ CARD SERIE
+   Grafica compatta, stile Netflix
+===================================================== */
 
+.wedding-series-card {
+    position: relative;
+    flex: 0 0 300px;
+    width: 300px;
+    height: 169px;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 10px;
+    background: #111;
+    border: 2px solid transparent;
+    box-shadow: 0 10px 25px rgba(0,0,0,.45);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+.wedding-series-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .35s ease, filter .35s ease;
+}
+
+.wedding-series-card:hover {
+    transform: scale(1.05);
+    z-index: 20;
+    border-color: #ff2d95;
+    box-shadow:
+        0 18px 35px rgba(0,0,0,.65),
+        0 0 20px rgba(255,45,149,.25);
+}
+
+.wedding-series-card:hover img {
+    transform: scale(1.04);
+    filter: brightness(.62);
+}
+
+/* Overlay compatto */
+
+.wedding-series-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px 16px 13px;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,.95) 0%,
+        rgba(0,0,0,.48) 42%,
+        rgba(0,0,0,0) 75%
+    );
+    z-index: 2;
+}
+
+/* Sulla card mostriamo solo titolo ed episodi */
+
+.wedding-series-overlay span,
+.wedding-series-overlay p {
+    display: none;
+}
+
+.wedding-series-overlay h3 {
+    position: static;
+    margin: 0 0 3px;
+    padding: 0;
+    color: #fff;
+    font-size: 18px;
+    line-height: 1.15;
+    font-weight: 800;
+    text-shadow: 0 2px 6px rgba(0,0,0,.9);
+}
+
+.wedding-series-overlay small {
+    display: block;
+    color: #ddd;
+    font-size: 11px;
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+/* Play centrale */
+
+.wedding-series-card::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    transform: translate(-50%, -50%) scale(.7);
+    border-radius: 50%;
+    background: #ff2d95;
+    opacity: 0;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 10;
+}
+
+.wedding-series-card::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform: translate(-42%, -50%) scale(.7);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 13px solid #fff;
+    opacity: 0;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 11;
+}
+
+.wedding-series-card:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.wedding-series-card:hover::after {
+    opacity: 1;
+    transform: translate(-42%, -50%) scale(1);
+}
+
+
+/* =====================================================
+   PAGINA SERIE Ã¢â‚¬â€ LA CERIMONIA
+   STILE EPISODI NETFLIX Ã¢â‚¬â€ COMPATTO
+===================================================== */
+
+.wedding-series-page {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 90000;
+    overflow-y: auto;
+    background: #000;
+    color: #fff;
+}
+
+.wedding-series-page.active {
+    display: block;
+}
+
+.wedding-series-top {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 45px;
+    background: linear-gradient(to bottom, #000, rgba(0,0,0,.9));
+}
+
+.wedding-back-button {
+    background: transparent;
+    color: #fff;
+    border: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.wedding-back-button:hover {
+    color: #ff2d95;
+}
+
+
+/* =========================
+   TESTATA SERIE
+========================= */
+
+.wedding-series-hero {
+    max-width: 1000px;
+    padding: 35px 55px 25px;
+}
+
+.series-label {
+    display: block;
+    color: #ff2d95;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.wedding-series-hero h1 {
+    font-size: 42px;
+    line-height: 1;
+    margin: 0 0 8px;
+    font-weight: 900;
+}
+
+.wedding-series-hero h2 {
+    font-size: 21px;
+    margin: 0 0 10px;
+    font-weight: 600;
+}
+
+.wedding-series-hero p {
+    max-width: 700px;
+    color: #aaa;
+    font-size: 15px;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.series-meta {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    color: #888;
+    font-size: 14px;
+}
+
+
+/* =========================
+   EPISODI
+========================= */
+
+.episodes-section {
+    padding: 10px 55px 70px;
+    max-width: 1050px;
+}
+
+.episodes-section > h2 {
+    font-size: 25px;
+    margin: 0 0 18px;
+}
+
+
+/*
+   IMPORTANTISSIMO:
+   annulliamo qualsiasi regola .card globale.
+   Gli episodi devono essere righe piccole.
+*/
+
+.wedding-episodes {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 950px !important;
+}
+
+
+/* =========================
+   RIGA EPISODIO
+========================= */
+
+.wedding-episode {
+    position: relative !important;
+
+    display: grid !important;
+    grid-template-columns: 190px minmax(0, 1fr) !important;
+
+    width: 100% !important;
+    max-width: 950px !important;
+    min-width: 0 !important;
+
+    height: 108px !important;
+    min-height: 108px !important;
+
+    flex: none !important;
+
+    background: #181818 !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+
+    cursor: pointer;
+
+    transform: none;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.wedding-episode:hover {
+    background: #242424 !important;
+    transform: scale(1.01) !important;
+}
+
+
+/* =========================
+   MINIATURA
+========================= */
+
+.wedding-episode-image {
+    position: relative !important;
+
+    width: 190px !important;
+    height: 108px !important;
+
+    min-width: 190px !important;
+    min-height: 108px !important;
+
+    aspect-ratio: auto !important;
+
+    overflow: hidden;
+}
+
+.wedding-episode-image img {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    display: block;
+
+    transition: transform .25s ease, filter .25s ease;
+}
+
+.wedding-episode:hover .wedding-episode-image img {
+    transform: scale(1.04);
+    filter: brightness(.7);
+}
+
+
+/* Numero */
+
+.wedding-episode-number {
+    position: absolute !important;
+    left: 8px !important;
+    top: 8px !important;
+
+    z-index: 5;
+
+    background: #ff2d95;
+    color: #fff;
+
+    padding: 4px 7px !important;
+    border-radius: 4px;
+
+    font-size: 10px !important;
+    font-weight: 900;
+}
+
+
+/* =========================
+   TESTO A DESTRA
+========================= */
+
+.wedding-episode-info {
+    position: static !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+
+    min-width: 0 !important;
+
+    padding: 12px 20px !important;
+
+    background: transparent !important;
+}
+
+.wedding-episode-info h3 {
+    position: static !important;
+
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+
+    color: #fff;
+
+    font-size: 18px !important;
+    line-height: 1.2 !important;
+    font-weight: 800 !important;
+
+    text-shadow: none !important;
+}
+
+.wedding-episode-info p {
+    position: static !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    max-width: 650px;
+
+    color: #999 !important;
+
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+}
+
+
+/* =========================
+   PLAY SOLO SULLA MINIATURA
+========================= */
+
+.wedding-episode::before {
+    content: "";
+
+    position: absolute !important;
+
+    left: 95px !important;
+    top: 54px !important;
+
+    width: 38px;
+    height: 38px;
+
+    transform: translate(-50%, -50%) scale(.8);
+
+    border-radius: 50%;
+
+    background: #ff2d95;
+
+    opacity: 0;
+
+    z-index: 10;
+
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+.wedding-episode::after {
+    content: "";
+
+    position: absolute !important;
+
+    left: 95px !important;
+    top: 54px !important;
+
+    width: 0;
+    height: 0;
+
+    transform: translate(-42%, -50%);
+
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 11px solid #fff;
+
+    opacity: 0;
+
+    z-index: 11;
+
+    transition: opacity .2s ease;
+}
+
+.wedding-episode:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.wedding-episode:hover::after {
+    opacity: 1;
+}
+
+
+/* TV */
+
+.wedding-episode.tv-focus {
+    outline: 3px solid #fff;
+    transform: scale(1.015) !important;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media screen and (max-width: 768px) {
+
+    .wedding-series-top {
+        height: 60px;
+        padding: 0 18px;
+    }
+
+    .wedding-series-hero {
+        padding: 28px 20px 20px;
+    }
+
+    .wedding-series-hero h1 {
+        font-size: 34px;
+    }
+
+    .wedding-series-hero h2 {
+        font-size: 19px;
+    }
+
+    .wedding-series-hero p {
+        font-size: 14px;
+    }
+
+    .episodes-section {
+        padding: 10px 20px 60px;
+    }
+
+    .episodes-section > h2 {
+        font-size: 23px;
+    }
+
+    .wedding-episode {
+        grid-template-columns: 125px minmax(0, 1fr) !important;
+        width: 100% !important;
+        height: 82px !important;
+        min-height: 82px !important;
+    }
+
+    .wedding-episode-image {
+        width: 125px !important;
+        min-width: 125px !important;
+        height: 82px !important;
+        min-height: 82px !important;
+    }
+
+    .wedding-episode-info {
+        padding: 9px 12px !important;
+    }
+
+    .wedding-episode-info h3 {
+        font-size: 15px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .wedding-episode-info p {
+        font-size: 11px !important;
+        line-height: 1.3 !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .wedding-episode::before {
+        left: 62px !important;
+        top: 41px !important;
+    }
+
+    .wedding-episode::after {
+        left: 62px !important;
+        top: 41px !important;
+    }
+}
+
+/* =====================================================
+   RESPONSIVE Ã¢â‚¬â€ CARD E PAGINA SERIE
+===================================================== */
+
+@media screen and (max-width: 768px) {
+
+    .wedding-series-card {
+        flex: 0 0 82%;
+        width: 82%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        border-radius: 10px;
+    }
+
+    .wedding-series-overlay {
+        padding: 14px;
+    }
+
+    .wedding-series-overlay h3 {
+        font-size: 17px;
+    }
+
+    .wedding-series-overlay small {
+        font-size: 11px;
+    }
+
+    .wedding-series-top {
+        height: 65px;
+        padding: 0 18px;
+    }
+
+    .wedding-back-button {
+        font-size: 15px;
+        padding: 10px 16px;
+    }
+
+    .wedding-series-hero {
+        padding: 35px 20px 25px;
+    }
+
+    .wedding-series-hero h1 {
+        font-size: 42px;
+    }
+
+    .wedding-series-hero h2 {
+        font-size: 22px;
+    }
+
+    .wedding-series-hero p {
+        font-size: 17px;
+    }
+
+    .episodes-section {
+        padding: 20px 20px 90px;
+    }
+
+    .episodes-section > h2 {
+        font-size: 26px;
+    }
+
+    .wedding-episodes {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* =====================================================
+   FIX DEFINITIVO EPISODI LA CERIMONIA
+   STILE NETFLIX - LISTA COMPATTA
+===================================================== */
+
+#weddingEpisodes {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+
+    width: 100% !important;
+    max-width: 950px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+/* OGNI EPISODIO */
+
+#weddingEpisodes > * {
+    display: grid !important;
+
+    grid-template-columns: 190px 1fr !important;
+
+    width: 100% !important;
+    max-width: 950px !important;
+
+    height: 108px !important;
+    min-height: 108px !important;
+
+    flex: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    background: #181818 !important;
+
+    border-radius: 6px !important;
+
+    overflow: hidden !important;
+
+    position: relative !important;
+
+    box-shadow: none !important;
+
+    transform: none !important;
+}
+
+
+/* BLOCCA LA VECCHIA REGOLA .card */
+
+#weddingEpisodes > *.card {
+    display: grid !important;
+    grid-template-columns: 190px 1fr !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 950px !important;
+
+    height: 108px !important;
+    min-height: 108px !important;
+}
+
+
+/* IMMAGINE */
+
+#weddingEpisodes > * img {
+    width: 190px !important;
+    min-width: 190px !important;
+
+    height: 108px !important;
+    min-height: 108px !important;
+
+    aspect-ratio: auto !important;
+
+    object-fit: cover !important;
+
+    display: block !important;
+
+    position: relative !important;
+}
+
+
+/* TESTO A DESTRA */
+
+#weddingEpisodes > * .wedding-episode-info,
+#weddingEpisodes > * .episode-info {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+
+    padding: 12px 20px !important;
+
+    min-width: 0 !important;
+
+    position: static !important;
+}
+
+
+/* TITOLO */
+
+#weddingEpisodes > * h3 {
+    position: static !important;
+
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+
+    font-size: 18px !important;
+    line-height: 1.2 !important;
+
+    color: white !important;
+
+    text-shadow: none !important;
+}
+
+
+/* DESCRIZIONE */
+
+#weddingEpisodes > * p {
+    position: static !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: #999 !important;
+
+    font-size: 13px !important;
+
+    line-height: 1.4 !important;
+
+    max-width: 650px !important;
+}
+
+
+/* NASCONDI EVENTUALI ELEMENTI INUTILI */
+
+#weddingEpisodes > * .episode-number {
+    position: absolute !important;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media screen and (max-width: 768px) {
+
+    #weddingEpisodes {
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    #weddingEpisodes > *,
+    #weddingEpisodes > *.card {
+        grid-template-columns: 125px 1fr !important;
+
+        width: 100% !important;
+
+        height: 82px !important;
+        min-height: 82px !important;
+    }
+
+    #weddingEpisodes > * img {
+        width: 125px !important;
+        min-width: 125px !important;
+
+        height: 82px !important;
+        min-height: 82px !important;
+    }
+
+    #weddingEpisodes > * .wedding-episode-info,
+    #weddingEpisodes > * .episode-info {
+        padding: 8px 12px !important;
+    }
+
+    #weddingEpisodes > * h3 {
+        font-size: 14px !important;
+        margin-bottom: 4px !important;
+    }
+
+    #weddingEpisodes > * p {
+        font-size: 11px !important;
+        line-height: 1.3 !important;
+
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+
+        overflow: hidden !important;
+    }
+}
+
+/* =====================================================
+   FIX DEFINITIVO â€” CARD IL MATRIMONIO
+   Wedding Dedications + La Cerimonia
+   STESSA IDENTICA DIMENSIONE
+===================================================== */
+
+#matrimonio .cards {
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:24px !important;
+    width:100% !important;
+    max-width:1100px !important;
+    align-items:stretch !important;
+}
+
+#matrimonio .cards > .card,
+#matrimonio #dedicationCard,
+#matrimonio #weddingSeriesCard {
+    position:relative !important;
+    width:100% !important;
+    height:320px !important;
+    min-width:0 !important;
+    min-height:320px !important;
+    max-width:none !important;
+    max-height:320px !important;
+    margin:0 !important;
+    padding:0 !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+    border-radius:16px !important;
+    flex:none !important;
+}
+
+#matrimonio #dedicationCard > img,
+#matrimonio #weddingSeriesCard > img {
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:0 !important;
+    min-height:0 !important;
+    max-width:none !important;
+    max-height:none !important;
+    padding:0 !important;
+    margin:0 !important;
+    object-fit:cover !important;
+    display:block !important;
+}
+
+#matrimonio #dedicationCard .dedication-overlay {
+    position:absolute !important;
+    left:0 !important; right:0 !important; bottom:0 !important;
+    padding:16px !important;
+    background:linear-gradient(to top,rgba(0,0,0,.95),rgba(0,0,0,.35),transparent) !important;
+    z-index:4 !important;
+}
+
+#matrimonio #dedicationCard .dedication-overlay h3 {
+    position:static !important;
+    margin:0 !important; padding:0 !important;
+    font-size:20px !important; line-height:1.15 !important;
+    color:white !important;
+}
+
+#matrimonio #weddingSeriesCard .wedding-series-overlay {
+    position:absolute !important; inset:0 !important;
+    display:flex !important; flex-direction:column !important; justify-content:flex-end !important;
+    padding:16px !important;
+    background:linear-gradient(to top,rgba(0,0,0,.95) 0%,rgba(0,0,0,.45) 45%,transparent 78%) !important;
+    z-index:4 !important;
+}
+
+#matrimonio #weddingSeriesCard .wedding-series-overlay span,
+#matrimonio #weddingSeriesCard .wedding-series-overlay p { display:none !important; }
+
+#matrimonio #weddingSeriesCard .wedding-series-overlay h3 {
+    position:static !important; margin:0 0 4px !important; padding:0 !important;
+    font-size:20px !important; line-height:1.15 !important; color:white !important;
+}
+
+#matrimonio #weddingSeriesCard .wedding-series-overlay small {
+    display:block !important; font-size:12px !important; color:#ddd !important;
+}
+
+/* PLAY CENTRALE */
+#matrimonio #dedicationCard::before,
+#matrimonio #weddingSeriesCard::before {
+    content:"" !important; position:absolute !important; top:50% !important; left:50% !important;
+    width:58px !important; height:58px !important;
+    transform:translate(-50%,-50%) scale(.7) !important;
+    border-radius:50% !important; background:#ff2d95 !important;
+    opacity:0 !important; z-index:10 !important; transition:.25s !important;
+}
+
+#matrimonio #dedicationCard::after,
+#matrimonio #weddingSeriesCard::after {
+    content:"" !important; position:absolute !important; top:50% !important; left:50% !important;
+    width:0 !important; height:0 !important; transform:translate(-42%,-50%) scale(.7) !important;
+    border-top:10px solid transparent !important; border-bottom:10px solid transparent !important;
+    border-left:15px solid white !important; opacity:0 !important; z-index:11 !important; transition:.25s !important;
+}
+
+#matrimonio #dedicationCard:hover::before,
+#matrimonio #weddingSeriesCard:hover::before { opacity:1 !important; transform:translate(-50%,-50%) scale(1) !important; }
+#matrimonio #dedicationCard:hover::after,
+#matrimonio #weddingSeriesCard:hover::after { opacity:1 !important; transform:translate(-42%,-50%) scale(1) !important; }
+
+@media screen and (max-width:768px) {
+    #matrimonio .cards { grid-template-columns:1fr !important; gap:20px !important; }
+    #matrimonio .cards > .card, #matrimonio #dedicationCard, #matrimonio #weddingSeriesCard {
+        width:100% !important; height:220px !important; min-height:220px !important; max-height:220px !important;
+    }
+    #matrimonio #dedicationCard > img, #matrimonio #weddingSeriesCard > img {
+        width:100% !important; height:100% !important; object-fit:cover !important; padding:0 !important;
+    }
+}
+
+/* =====================================================
+   FIX DEFINITIVO CARD IL MATRIMONIO
+   STESSE DIMENSIONI - STESSO FORMATO
+===================================================== */
+
+#matrimonio .cards {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+
+    width: 100% !important;
+    max-width: 1300px !important;
+
+    align-items: stretch !important;
+}
+
+
+/* =====================================================
+   ENTRAMBE LE CARD
+===================================================== */
+
+#matrimonio #dedicationCard,
+#matrimonio #weddingSeriesCard {
+
+    width: 100% !important;
+    height: 320px !important;
+
+    min-width: 0 !important;
+    min-height: 320px !important;
+
+    max-width: none !important;
+    max-height: 320px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: none !important;
+    outline: none !important;
+
+    border-radius: 24px !important;
+
+    overflow: hidden !important;
+
+    position: relative !important;
+
+    box-sizing: border-box !important;
+
+    background: #111 !important;
+}
+
+
+/* =====================================================
+   IMMAGINI IDENTICHE
+===================================================== */
+
+#matrimonio #dedicationCard > img,
+#matrimonio #weddingSeriesCard > img {
+
+    position: absolute !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    min-width: 100% !important;
+    min-height: 100% !important;
+
+    max-width: none !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    object-fit: cover !important;
+
+    display: block !important;
+}
+
+
+/* =====================================================
+   WEDDING DEDICATIONS
+===================================================== */
+
+#matrimonio #dedicationCard .dedication-overlay {
+
+    position: absolute !important;
+
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+
+    padding: 20px !important;
+
+    z-index: 5 !important;
+
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,.9),
+        rgba(0,0,0,.2),
+        transparent
+    ) !important;
+}
+
+#matrimonio #dedicationCard .dedication-overlay h3 {
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: white !important;
+
+    font-size: 26px !important;
+    line-height: 1.1 !important;
+
+    font-weight: 900 !important;
+}
+
+
+/* =====================================================
+   LA CERIMONIA
+===================================================== */
+
+#matrimonio #weddingSeriesCard .wedding-series-overlay {
+
+    position: absolute !important;
+
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+
+    padding: 20px !important;
+
+    z-index: 5 !important;
+
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,.9),
+        rgba(0,0,0,.2),
+        transparent
+    ) !important;
+}
+
+#matrimonio #weddingSeriesCard .wedding-series-overlay span {
+    display: none !important;
+}
+
+#matrimonio #weddingSeriesCard .wedding-series-overlay p {
+    display: none !important;
+}
+
+#matrimonio #weddingSeriesCard .wedding-series-overlay h3 {
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: white !important;
+
+    font-size: 26px !important;
+    line-height: 1.1 !important;
+
+    font-weight: 900 !important;
+}
+
+#matrimonio #weddingSeriesCard .wedding-series-overlay small {
+
+    display: block !important;
+
+    margin-top: 5px !important;
+
+    color: #ddd !important;
+
+    font-size: 14px !important;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    #matrimonio .cards {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+    }
+
+    #matrimonio #dedicationCard,
+    #matrimonio #weddingSeriesCard {
+
+        height: 220px !important;
+
+        min-height: 220px !important;
+        max-height: 220px !important;
+    }
+}
+
+/* =====================================================
+   BANNER PAGINA "LA CERIMONIA"
+   STILE NETFLIX
+===================================================== */
+
+.wedding-series-page .wedding-series-hero {
+    position: relative !important;
+
+    width: 100% !important;
+    max-width: none !important;
+
+    min-height: 620px !important;
+
+    padding: 0 !important;
+
+    overflow: hidden !important;
+
+    display: flex !important;
+    align-items: flex-end !important;
+}
+
+
+/* FOTO BANNER */
+
+.wedding-series-page .wedding-series-banner {
+    position: absolute !important;
+
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    display: block !important;
+
+    z-index: 1 !important;
+}
+
+
+/* OSCURAMENTO NETFLIX */
+
+.wedding-series-page .wedding-series-banner-overlay {
+    position: absolute !important;
+
+    inset: 0 !important;
+
+    z-index: 2 !important;
+
+    background:
+        linear-gradient(
+            to top,
+            #000 0%,
+            rgba(0,0,0,.75) 25%,
+            rgba(0,0,0,.25) 60%,
+            rgba(0,0,0,.05) 100%
+        ) !important;
+}
+
+
+/* TESTI SOPRA LA FOTO */
+
+.wedding-series-page .wedding-series-hero-content {
+    position: relative !important;
+
+    z-index: 3 !important;
+
+    width: 100% !important;
+
+    max-width: 700px !important;
+
+    padding: 0 55px 55px !important;
+}
+
+
+/* BRIDEFLIX ORIGINAL */
+
+.wedding-series-page .series-label {
+    display: block !important;
+
+    color: #ff2d95 !important;
+
+    font-size: 14px !important;
+
+    font-weight: 900 !important;
+
+    letter-spacing: 2px !important;
+
+    margin-bottom: 12px !important;
+}
+
+
+/* TITOLO */
+
+.wedding-series-page .wedding-series-hero h1 {
+    margin: 0 0 8px !important;
+
+    color: white !important;
+
+    font-size: 58px !important;
+
+    line-height: 1 !important;
+
+    font-weight: 900 !important;
+
+    text-shadow: 0 3px 12px rgba(0,0,0,.8) !important;
+}
+
+
+/* NOMI */
+
+.wedding-series-page .wedding-series-hero h2 {
+    margin: 0 0 15px !important;
+
+    color: white !important;
+
+    font-size: 24px !important;
+
+    font-weight: 600 !important;
+}
+
+
+/* DESCRIZIONE */
+
+.wedding-series-page .wedding-series-hero p {
+    margin: 0 !important;
+
+    max-width: 650px !important;
+
+    color: #ddd !important;
+
+    font-size: 17px !important;
+
+    line-height: 1.5 !important;
+}
+
+
+/* META */
+
+.wedding-series-page .series-meta {
+    display: flex !important;
+
+    gap: 10px !important;
+
+    margin-top: 18px !important;
+
+    color: #ddd !important;
+
+    font-size: 15px !important;
+}
+
+
+/* =====================================================
+   EPISODI SOTTO IL BANNER
+===================================================== */
+
+.wedding-series-page .episodes-section {
+    position: relative !important;
+
+    background: #000 !important;
+
+    padding: 35px 55px 70px !important;
+
+    max-width: none !important;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media screen and (max-width: 768px) {
+
+    .wedding-series-page .wedding-series-hero {
+
+        min-height: 560px !important;
+
+    }
+
+
+    .wedding-series-page .wedding-series-banner {
+
+        object-position: center center !important;
+
+    }
+
+
+    .wedding-series-page .wedding-series-hero-content {
+
+        padding: 0 20px 35px !important;
+
+    }
+
+
+    .wedding-series-page .wedding-series-hero h1 {
+
+        font-size: 40px !important;
+
+    }
+
+
+    .wedding-series-page .wedding-series-hero h2 {
+
+        font-size: 20px !important;
+
+    }
+
+
+    .wedding-series-page .wedding-series-hero p {
+
+        font-size: 14px !important;
+
+    }
+
+
+    .wedding-series-page .episodes-section {
+
+        padding: 25px 20px 90px !important;
+
+    }
+
+}

@@ -1,56 +1,45 @@
 /* =====================================================
-   BRIDEFLIX
-   SCRIPT.JS
-   VERSIONE STABILE SENZA PLAYER.HTML
+   BRIDEFLIX - SCRIPT.JS
+   VERSIONE DEFINITIVA
 ===================================================== */
 
 
 /* =====================================================
-   ELEMENTI VIDEO
+   ELEMENTI PRINCIPALI
 ===================================================== */
 
-const modal =
+const videoModal =
     document.getElementById("videoModal");
 
-const iframe =
+const trailerVideo =
     document.getElementById("trailerVideo");
 
-const closeButton =
-    document.querySelector("#videoModal .closeButton");
+const videoCloseButton =
+    document.querySelector(
+        "#videoModal .closeButton"
+    );
 
-const homeButton =
+const goHomeButton =
     document.getElementById("goHome");
 
 let lastScrollPosition = 0;
 
 
 /* =====================================================
-   CREA LE CARD
-   QUESTA PARTE VIENE ESEGUITA SUBITO
+   CREA CARD VIDEO
+   PARTY + SPECIAL
 ===================================================== */
 
-function createCategory(category, containerID) {
+function createCategory(category, containerId) {
 
     const container =
-        document.getElementById(containerID);
+        document.getElementById(containerId);
 
     if (!container) {
-
-        console.warn(
-            "Container non trovato:",
-            containerID
-        );
-
         return;
     }
 
-
-    /* Pulisce il contenitore */
-
     container.innerHTML = "";
-
-
-    /* Cerca i video della categoria */
 
     if (
         typeof videos === "undefined" ||
@@ -58,12 +47,11 @@ function createCategory(category, containerID) {
     ) {
 
         console.error(
-            "ERRORE: videos non trovato in data.js"
+            "videos non trovato in data.js"
         );
 
         return;
     }
-
 
     const list =
         videos.filter(function(video) {
@@ -72,16 +60,6 @@ function createCategory(category, containerID) {
 
         });
 
-
-    console.log(
-        "Categoria:",
-        category,
-        "Video:",
-        list.length
-    );
-
-
-    /* Crea le card */
 
     list.forEach(function(video) {
 
@@ -92,14 +70,6 @@ function createCategory(category, containerID) {
             "card";
 
 
-        if (video.id) {
-
-            card.dataset.id =
-                video.id;
-
-        }
-
-
         card.innerHTML = `
 
             <img
@@ -107,29 +77,26 @@ function createCategory(category, containerID) {
                 alt="${video.title}"
             >
 
-            <h3>
-                ${video.title}
-            </h3>
+            <div class="card-info">
+
+                <h3>
+                    ${video.title}
+                </h3>
+
+            </div>
 
         `;
 
 
-        /* ---------------------------------------------
-           CLICK VIDEO
-        --------------------------------------------- */
-
         if (video.youtube) {
 
-            card.addEventListener(
-                "click",
-                function() {
+            card.onclick = function() {
 
-                    openVideo(
-                        video.youtube
-                    );
+                openVideo(
+                    video.youtube
+                );
 
-                }
-            );
+            };
 
         }
 
@@ -142,7 +109,7 @@ function createCategory(category, containerID) {
 
 
 /* =====================================================
-   CREA TUTTE LE CATEGORIE
+   CREA PARTY
 ===================================================== */
 
 createCategory(
@@ -150,10 +117,10 @@ createCategory(
     "partyRow"
 );
 
-createCategory(
-    "wedding",
-    "weddingCards"
-);
+
+/* =====================================================
+   CREA SPECIALI
+===================================================== */
 
 createCategory(
     "special",
@@ -162,7 +129,7 @@ createCategory(
 
 
 /* =====================================================
-   APRE VIDEO
+   APERTURA VIDEO
 ===================================================== */
 
 function openVideo(url) {
@@ -170,42 +137,41 @@ function openVideo(url) {
     if (!url) {
 
         console.error(
-            "URL video mancante"
+            "URL YouTube mancante"
         );
 
         return;
     }
 
 
-    if (!iframe) {
+    if (
+        !videoModal ||
+        !trailerVideo
+    ) {
 
         console.error(
-            "iframe #trailerVideo non trovato"
+            "Popup video non trovato"
         );
 
         return;
     }
 
-
-    if (!modal) {
-
-        console.error(
-            "#videoModal non trovato"
-        );
-
-        return;
-    }
-
-
-    /* Salva posizione */
 
     lastScrollPosition =
         window.scrollY;
 
 
-    /* ---------------------------------------------
-       CREA URL YOUTUBE
-    --------------------------------------------- */
+    /*
+       Aggiunge automaticamente:
+       autoplay
+       rel
+       playsinline
+       vq=hd1080
+
+       NOTA:
+       YouTube decide comunque
+       autonomamente la qualità finale.
+    */
 
     const separator =
         url.includes("?")
@@ -213,31 +179,18 @@ function openVideo(url) {
             : "?";
 
 
-    const videoURL =
+    trailerVideo.src =
         url +
         separator +
-        "autoplay=1&rel=0&playsinline=1";
+        "autoplay=1" +
+        "&rel=0" +
+        "&playsinline=1" +
+        "&vq=hd1080";
 
 
-    console.log(
-        "BrideFlix video:",
-        videoURL
-    );
-
-
-    /* Carica video */
-
-    iframe.src =
-        videoURL;
-
-
-    /* Mostra popup */
-
-    modal.style.display =
+    videoModal.style.display =
         "block";
 
-
-    /* Blocca scroll */
 
     document.body.style.overflow =
         "hidden";
@@ -246,23 +199,22 @@ function openVideo(url) {
 
 
 /* =====================================================
-   CHIUDE VIDEO
+   CHIUDI VIDEO
 ===================================================== */
 
 function closeVideo() {
 
-    if (modal) {
+    if (videoModal) {
 
-        modal.style.display =
+        videoModal.style.display =
             "none";
 
     }
 
 
-    if (iframe) {
+    if (trailerVideo) {
 
-        iframe.src =
-            "";
+        trailerVideo.src = "";
 
     }
 
@@ -277,12 +229,10 @@ function closeVideo() {
    PULSANTE X VIDEO
 ===================================================== */
 
-if (closeButton) {
+if (videoCloseButton) {
 
-    closeButton.addEventListener(
-        "click",
-        closeVideo
-    );
+    videoCloseButton.onclick =
+        closeVideo;
 
 }
 
@@ -291,20 +241,324 @@ if (closeButton) {
    CLICK SFONDO VIDEO
 ===================================================== */
 
-if (modal) {
+if (videoModal) {
 
-    modal.addEventListener(
-        "click",
+    videoModal.onclick =
         function(e) {
 
-            if (e.target === modal) {
+            if (
+                e.target === videoModal
+            ) {
 
                 closeVideo();
 
             }
 
+        };
+
+}
+
+
+/* =====================================================
+   TORNA ALLA HOME
+===================================================== */
+
+if (goHomeButton) {
+
+    goHomeButton.onclick =
+        function() {
+
+            closeVideo();
+
+            window.scrollTo({
+
+                top:
+                    lastScrollPosition,
+
+                behavior:
+                    "smooth"
+
+            });
+
+        };
+
+}
+
+
+/* =====================================================
+   LA CERIMONIA
+===================================================== */
+
+const weddingSeriesCard =
+    document.getElementById(
+        "weddingSeriesCard"
+    );
+
+const weddingSeriesPage =
+    document.getElementById(
+        "weddingSeriesPage"
+    );
+
+const weddingEpisodes =
+    document.getElementById(
+        "weddingEpisodes"
+    );
+
+const closeWeddingSeries =
+    document.getElementById(
+        "closeWeddingSeries"
+    );
+
+const episodeCounter =
+    document.getElementById(
+        "seriesEpisodeCount"
+    );
+
+
+/* =====================================================
+   CREA EPISODI
+===================================================== */
+
+function createWeddingEpisodes() {
+
+    if (!weddingEpisodes) {
+
+        console.error(
+            "#weddingEpisodes non trovato"
+        );
+
+        return;
+    }
+
+
+    if (
+        typeof videos === "undefined" ||
+        !Array.isArray(videos)
+    ) {
+
+        console.error(
+            "videos non trovato"
+        );
+
+        return;
+    }
+
+
+    weddingEpisodes.innerHTML =
+        "";
+
+
+    const weddingVideos =
+        videos.filter(function(video) {
+
+            return video.category === "wedding";
+
+        });
+
+
+    console.log(
+        "Episodi matrimonio:",
+        weddingVideos.length
+    );
+
+
+    if (episodeCounter) {
+
+        episodeCounter.textContent =
+            weddingVideos.length +
+            (
+                weddingVideos.length === 1
+                    ? " EPISODIO"
+                    : " EPISODI"
+            );
+
+    }
+
+
+    weddingVideos.forEach(
+        function(video, index) {
+
+            const episode =
+                document.createElement(
+                    "article"
+                );
+
+
+            /*
+               IMPORTANTE:
+               questa classe corrisponde
+               al CSS.
+            */
+
+            episode.className =
+                "wedding-episode-card";
+
+
+            episode.innerHTML = `
+
+                <div class="episode-number">
+
+                    ${String(index + 1)
+                        .padStart(2, "0")}
+
+                </div>
+
+
+                <img
+                    src="${video.image}"
+                    alt="${video.title}"
+                >
+
+
+                <div class="episode-info">
+
+                    <h3>
+                        ${video.title}
+                    </h3>
+
+
+                    <p>
+                        ${
+                            video.description ||
+                            "Un momento speciale del nostro matrimonio."
+                        }
+                    </p>
+
+                </div>
+
+            `;
+
+
+            if (video.youtube) {
+
+                episode.onclick =
+                    function() {
+
+                        openVideo(
+                            video.youtube
+                        );
+
+                    };
+
+            }
+
+
+            weddingEpisodes.appendChild(
+                episode
+            );
+
         }
     );
+
+}
+
+
+/* =====================================================
+   APRI LA CERIMONIA
+===================================================== */
+
+if (weddingSeriesCard) {
+
+    weddingSeriesCard.onclick =
+        function() {
+
+            console.log(
+                "CLICK LA CERIMONIA"
+            );
+
+            history.pushState(
+    { page: "weddingSeries" },
+    "",
+    "#cerimonia"
+);
+
+
+            createWeddingEpisodes();
+
+
+            if (weddingSeriesPage) {
+
+                weddingSeriesPage.style.display =
+                    "block";
+
+                weddingSeriesPage.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            document.body.style.overflow =
+                "hidden";
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "instant"
+            });
+
+        };
+
+}
+
+
+/* =====================================================
+   CHIUDI LA CERIMONIA
+===================================================== */
+
+function closeWeddingPage() {
+
+    if (!weddingSeriesPage) {
+        return;
+    }
+
+
+    weddingSeriesPage.style.display =
+        "none";
+
+
+    weddingSeriesPage.classList.remove(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "auto";
+
+}
+
+
+if (closeWeddingSeries) {
+
+    closeWeddingSeries.onclick =
+        closeWeddingPage;
+
+}
+
+
+/* =====================================================
+   WEDDING PHOTOS
+===================================================== */
+
+const dedicationCard =
+    document.getElementById(
+        "dedicationCard"
+    );
+
+
+if (dedicationCard) {
+
+    dedicationCard.onclick =
+        function() {
+
+            /*
+               Apre la pagina delle foto.
+            */
+
+            window.location.href =
+                "ricordi.html";
+
+        };
 
 }
 
@@ -317,71 +571,31 @@ document.addEventListener(
     "keydown",
     function(e) {
 
-        if (e.key === "Escape") {
-
-            closeVideo();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   TORNA ALLA HOME
-===================================================== */
-
-if (homeButton) {
-
-    homeButton.addEventListener(
-        "click",
-        function() {
-
-            closeVideo();
-
-
-            window.scrollTo({
-
-                top:
-                    lastScrollPosition,
-
-                behavior:
-                    "smooth"
-
-            });
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-const header =
-    document.querySelector("header");
-
-
-window.addEventListener(
-    "scroll",
-    function() {
-
-        if (!header) {
+        if (e.key !== "Escape") {
             return;
         }
 
 
-        if (window.scrollY > 60) {
+        if (
+            videoModal &&
+            videoModal.style.display === "block"
+        ) {
 
-            header.style.background =
-                "#000";
+            closeVideo();
 
-        } else {
+            return;
 
-            header.style.background =
-                "linear-gradient(to bottom,#000,transparent)";
+        }
+
+
+        if (
+            weddingSeriesPage &&
+            weddingSeriesPage.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeWeddingPage();
 
         }
 
@@ -390,7 +604,7 @@ window.addEventListener(
 
 
 /* =====================================================
-   DEDICHE
+   DEDICHE / SUPABASE
 ===================================================== */
 
 const dedicaModal =
@@ -419,11 +633,7 @@ const closeDedica =
     );
 
 
-/* =====================================================
-   APRE DEDICA
-===================================================== */
-
-function openDedica(d) {
+function openDedica(dedica) {
 
     if (!dedicaModal) {
         return;
@@ -433,7 +643,7 @@ function openDedica(d) {
     if (dedicaFoto) {
 
         dedicaFoto.src =
-            d.foto || "";
+            dedica.foto || "";
 
     }
 
@@ -441,7 +651,7 @@ function openDedica(d) {
     if (dedicaNome) {
 
         dedicaNome.textContent =
-            d.nome || "";
+            dedica.nome || "";
 
     }
 
@@ -449,7 +659,7 @@ function openDedica(d) {
     if (dedicaMessaggio) {
 
         dedicaMessaggio.textContent =
-            d.messaggio || "";
+            dedica.messaggio || "";
 
     }
 
@@ -463,10 +673,6 @@ function openDedica(d) {
 
 }
 
-
-/* =====================================================
-   CHIUDE DEDICA
-===================================================== */
 
 function closeDedicaModal() {
 
@@ -485,45 +691,34 @@ function closeDedicaModal() {
 }
 
 
-/* =====================================================
-   PULSANTE CHIUDI DEDICA
-===================================================== */
-
 if (closeDedica) {
 
-    closeDedica.addEventListener(
-        "click",
-        closeDedicaModal
-    );
+    closeDedica.onclick =
+        closeDedicaModal;
 
 }
 
 
-/* =====================================================
-   CLICK SFONDO DEDICA
-===================================================== */
-
 if (dedicaModal) {
 
-    dedicaModal.addEventListener(
-        "click",
+    dedicaModal.onclick =
         function(e) {
 
-            if (e.target === dedicaModal) {
+            if (
+                e.target === dedicaModal
+            ) {
 
                 closeDedicaModal();
 
             }
 
-        }
-    );
+        };
 
 }
 
 
 /* =====================================================
    SUPABASE
-   NON DEVE BLOCCARE LE CARD
 ===================================================== */
 
 let sb = null;
@@ -545,10 +740,10 @@ try {
 
     }
 
-} catch(error) {
+} catch (error) {
 
     console.error(
-        "Errore inizializzazione Supabase:",
+        "Errore Supabase:",
         error
     );
 
@@ -562,11 +757,6 @@ try {
 async function caricaDediche() {
 
     if (!sb) {
-
-        console.warn(
-            "Supabase non disponibile."
-        );
-
         return;
     }
 
@@ -585,22 +775,20 @@ async function caricaDediche() {
                 );
 
 
-        const data =
-            result.data;
-
-        const error =
-            result.error;
-
-
-        if (error) {
+        if (result.error) {
 
             console.error(
                 "Errore dediche:",
-                error
+                result.error
             );
 
             return;
+
         }
+
+
+        const data =
+            result.data || [];
 
 
         const row =
@@ -609,53 +797,66 @@ async function caricaDediche() {
             );
 
 
+        /*
+           Se la pagina Home non contiene
+           dediche-row, non facciamo nulla.
+        */
+
         if (!row) {
             return;
         }
 
 
-        row.innerHTML = "";
+        row.innerHTML =
+            "";
 
 
-        data.forEach(function(d) {
+        data.forEach(
+            function(dedica) {
 
-            const card =
-                document.createElement("div");
-
-
-            card.className =
-                "card dedica-card";
-
-
-            card.innerHTML = `
-
-                <img
-                    src="${d.foto || ""}"
-                    alt="${d.nome || "Dedica"}"
-                >
-
-                <h3>
-                    ${d.nome || ""}
-                </h3>
-
-            `;
+                const card =
+                    document.createElement(
+                        "div"
+                    );
 
 
-            card.addEventListener(
-                "click",
-                function() {
-
-                    openDedica(d);
-
-                }
-            );
+                card.className =
+                    "card dedica-card";
 
 
-            row.appendChild(card);
+                card.innerHTML = `
 
-        });
+                    <img
+                        src="${dedica.foto || ""}"
+                        alt="${dedica.nome || "Dedica"}"
+                    >
 
-    } catch(error) {
+                    <h3>
+                        ${dedica.nome || ""}
+                    </h3>
+
+                `;
+
+
+                card.onclick =
+                    function() {
+
+                        openDedica(
+                            dedica
+                        );
+
+                    };
+
+
+                row.appendChild(
+                    card
+                );
+
+            }
+        );
+
+
+    } catch (error) {
 
         console.error(
             "Errore caricamento dediche:",
@@ -666,10 +867,6 @@ async function caricaDediche() {
 
 }
 
-
-/* =====================================================
-   CARICA DEDICHE
-===================================================== */
 
 caricaDediche();
 
@@ -690,21 +887,25 @@ if (
                 .register(
                     "./service-worker.js"
                 )
-                .then(function() {
+                .then(
+                    function() {
 
-                    console.log(
-                        "BrideFlix PWA attiva"
-                    );
+                        console.log(
+                            "BrideFlix PWA attiva"
+                        );
 
-                })
-                .catch(function(error) {
+                    }
+                )
+                .catch(
+                    function(error) {
 
-                    console.error(
-                        "Errore Service Worker:",
-                        error
-                    );
+                        console.error(
+                            "Errore Service Worker:",
+                            error
+                        );
 
-                });
+                    }
+                );
 
         }
     );
@@ -713,68 +914,56 @@ if (
 
 
 /* =====================================================
-   TV MODE
+   TV / TELECOMANDO
 ===================================================== */
 
-let currentCard =
-    null;
+let currentCard = null;
 
-let cards =
-    [];
-
-
-/* =====================================================
-   AGGIORNA CARDS
-===================================================== */
 
 function refreshCards() {
 
-    cards = [
-        ...document.querySelectorAll(
+    return Array.from(
+        document.querySelectorAll(
             ".card"
         )
-    ];
+    );
 
 }
 
 
-/* =====================================================
-   FOCUS TV
-===================================================== */
+function updateFocus(card) {
 
-function updateFocus(card = null) {
-
-    refreshCards();
+    const allCards =
+        refreshCards();
 
 
-    if (!cards.length) {
+    if (!allCards.length) {
         return;
     }
 
 
-    cards.forEach(function(c) {
+    allCards.forEach(
+        function(item) {
 
-        c.classList.remove(
-            "tv-focus"
-        );
+            item.classList.remove(
+                "tv-focus"
+            );
 
-    });
-
-
-    if (card) {
-
-        currentCard =
-            card;
-
-    }
+        }
+    );
 
 
-    if (!currentCard) {
+    if (!card) {
 
-        currentCard =
-            cards[0];
+        card =
+            currentCard ||
+            allCards[0];
 
     }
+
+
+    currentCard =
+        card;
 
 
     currentCard.classList.add(
@@ -784,23 +973,16 @@ function updateFocus(card = null) {
 
     currentCard.scrollIntoView({
 
-        behavior:
-            "smooth",
+        behavior: "smooth",
 
-        block:
-            "nearest",
+        block: "nearest",
 
-        inline:
-            "center"
+        inline: "center"
 
     });
 
 }
 
-
-/* =====================================================
-   PRIMO FOCUS
-===================================================== */
 
 window.addEventListener(
     "load",
@@ -809,13 +991,14 @@ window.addEventListener(
         setTimeout(
             function() {
 
-                refreshCards();
+                const allCards =
+                    refreshCards();
 
 
-                if (cards.length) {
+                if (allCards.length) {
 
                     updateFocus(
-                        cards[0]
+                        allCards[0]
                     );
 
                 }
@@ -828,19 +1011,34 @@ window.addEventListener(
 );
 
 
-/* =====================================================
-   TELECOMANDO
-===================================================== */
-
 document.addEventListener(
     "keydown",
     function(e) {
 
-        refreshCards();
+        /*
+           Se siamo dentro la pagina
+           della Cerimonia, lasciamo
+           il browser gestire le frecce.
+        */
+
+        if (
+            weddingSeriesPage &&
+            weddingSeriesPage.classList.contains(
+                "active"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const allCards =
+            refreshCards();
 
 
         if (
-            !cards.length ||
+            !allCards.length ||
             !currentCard
         ) {
 
@@ -850,25 +1048,24 @@ document.addEventListener(
 
 
         const index =
-            cards.indexOf(
+            allCards.indexOf(
                 currentCard
             );
 
 
-        switch(e.key) {
+        switch (e.key) {
 
             case "ArrowRight":
 
                 e.preventDefault();
 
-
                 if (
                     index <
-                    cards.length - 1
+                    allCards.length - 1
                 ) {
 
                     updateFocus(
-                        cards[index + 1]
+                        allCards[index + 1]
                     );
 
                 }
@@ -880,11 +1077,10 @@ document.addEventListener(
 
                 e.preventDefault();
 
-
                 if (index > 0) {
 
                     updateFocus(
-                        cards[index - 1]
+                        allCards[index - 1]
                     );
 
                 }
@@ -896,14 +1092,13 @@ document.addEventListener(
 
                 e.preventDefault();
 
-
                 if (
                     index + 4 <
-                    cards.length
+                    allCards.length
                 ) {
 
                     updateFocus(
-                        cards[index + 4]
+                        allCards[index + 4]
                     );
 
                 }
@@ -915,13 +1110,12 @@ document.addEventListener(
 
                 e.preventDefault();
 
-
                 if (
                     index - 4 >= 0
                 ) {
 
                     updateFocus(
-                        cards[index - 4]
+                        allCards[index - 4]
                     );
 
                 }
@@ -933,18 +1127,7 @@ document.addEventListener(
 
                 e.preventDefault();
 
-
                 currentCard.click();
-
-                break;
-
-
-            case "Escape":
-
-                e.preventDefault();
-
-
-                closeVideo();
 
                 break;
 
@@ -952,3 +1135,114 @@ document.addEventListener(
 
     }
 );
+
+/* =====================================================
+   TASTO BACKSPACE / TASTO INDIETRO
+   PAGINA LA CERIMONIA
+===================================================== */
+
+window.addEventListener("popstate", function () {
+
+    const weddingSeriesPage =
+        document.getElementById("weddingSeriesPage");
+
+    const videoModal =
+        document.getElementById("videoModal");
+
+    const dedicaModal =
+        document.getElementById("dedicaModal");
+
+
+    /* Se è aperta la pagina La Cerimonia */
+
+    if (
+        weddingSeriesPage &&
+        weddingSeriesPage.classList.contains("active")
+    ) {
+
+        weddingSeriesPage.classList.remove("active");
+
+        weddingSeriesPage.style.display = "none";
+
+        document.body.classList.remove("wedding-open");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "instant"
+        });
+    }
+
+
+    /* Chiudi anche eventuale video */
+
+    if (videoModal) {
+
+        videoModal.classList.remove("active");
+
+        videoModal.style.display = "none";
+
+    }
+
+
+    /* Chiudi eventuale finestra Wedding Photos */
+
+    if (dedicaModal) {
+
+        dedicaModal.classList.remove("active");
+
+        dedicaModal.style.display = "none";
+
+    }
+
+});
+
+
+/* =====================================================
+   BACKSPACE
+===================================================== */
+
+document.addEventListener("keydown", function (event) {
+
+    /* Backspace */
+
+    if (event.key === "Backspace") {
+
+        const activeElement = document.activeElement;
+
+        /*
+         * Non interferiamo quando l'utente
+         * sta scrivendo in un campo di testo
+         */
+
+        if (
+            activeElement &&
+            (
+                activeElement.tagName === "INPUT" ||
+                activeElement.tagName === "TEXTAREA" ||
+                activeElement.isContentEditable
+            )
+        ) {
+            return;
+        }
+
+
+        const weddingSeriesPage =
+            document.getElementById("weddingSeriesPage");
+
+
+        /* Se siamo dentro La Cerimonia */
+
+        if (
+            weddingSeriesPage &&
+            weddingSeriesPage.classList.contains("active")
+        ) {
+
+            event.preventDefault();
+
+            history.back();
+
+        }
+
+    }
+
+});
