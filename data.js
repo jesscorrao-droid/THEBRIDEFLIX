@@ -121,6 +121,13 @@ const videos = [
         youtube: "https://www.youtube.com/embed/Wnz0fA_sBYU"
     },
 
+{
+        category: "wedding",
+        title: "FINE DELLA CERIMONIA",
+        image: "images/ENDING.png",
+        youtube: "https://www.youtube.com/embed/Eblmui94uhY"
+    },
+
 
     /* ===============================
        CONTENUTI SPECIALI
